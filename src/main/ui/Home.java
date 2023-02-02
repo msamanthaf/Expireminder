@@ -20,20 +20,22 @@ public class Home {
         System.out.println("~ Categories ~");
         System.out.println("Press '+' to add new category");
         Categories.showAllCategories();
-        button = input.nextLine();
+        button = input.next();
         button();
     }
 
     private void button() {
-        switch (button) {
-            case "a":
-                Expireminder.logIn();
-            case "+":
-                new Categories();
-                new Home();
-            default:
-                button = input.nextLine();
-                button();
+        if (button.equals("e")) {
+            Expireminder.logIn();
+            Expireminder h;
+        } else if (button.equals("+")) {
+            new Categories();
+            new Home();
+        } else if (Categories.categoryNumber.contains(button)) {
+            Categories.editCategory(button);
+        } else {
+            button = input.nextLine();
+            button();
         }
     }
 }
