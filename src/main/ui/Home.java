@@ -1,6 +1,5 @@
 package ui;
 
-import model.Account;
 import model.Categories;
 import model.Items;
 
@@ -9,9 +8,16 @@ import java.util.Scanner;
 public class Home {
     private Scanner input = new Scanner(System.in);
     private String button;
+    private Expireminder currentExpireminder;
+    private Categories category;
 
-    public Home() {
-        System.out.println("Hello " + Account.userName + "!");
+    public Home(Expireminder current) {
+        this.currentExpireminder = current;
+        this.category = new Categories(this);
+    }
+
+    public void greetings() {
+        System.out.println("Hello " + currentExpireminder.getAccount().getName() + "!");
         System.out.println("Press 'e' to edit profile");
         System.out.println("=========================================================================================");
         System.out.println("You have: " + Items.nc + " items in good condition");
@@ -19,20 +25,19 @@ public class Home {
         System.out.println(Items.ex + " items expired");
         System.out.println("~ Categories ~");
         System.out.println("Press '+' to add new category");
-        Categories.showAllCategories();
-        button = input.next();
+        category.showAllCategories();
         button();
     }
 
-    private void button() {
+    public void button() {
+        button = input.next();
         if (button.equals("e")) {
-            Expireminder.logIn();
-            Expireminder h;
+            currentExpireminder.editProfile();
         } else if (button.equals("+")) {
-            new Categories();
-            new Home();
-        } else if (Categories.categoryNumber.contains(button)) {
-            Categories.editCategory(button);
+            category.addCategory();
+            greetings();
+        } else if (category.getCategoryNumber().contains(button)) {
+            category.editCategory(button);
         } else {
             button = input.nextLine();
             button();

@@ -6,17 +6,22 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Categories {
-    private static Scanner input = new Scanner(System.in);
-    private static ArrayList<String> categoryList = new ArrayList<>();
-    public static ArrayList<String> categoryNumber = new ArrayList<>();
+    private Scanner input = new Scanner(System.in);
+    private ArrayList<String> categoryList = new ArrayList<>();
+    private ArrayList<String> categoryNumber = new ArrayList<>();
+    private Home home;
 
-    public Categories() {
+    public Categories(Home home) {
+        this.home = home;
+    }
+
+    public void addCategory() {
         System.out.println("Category name:");
         String categoryName = input.nextLine();
         checkValid(categoryName);
     }
 
-    private static void checkValid(String name) {
+    private void checkValid(String name) {
         while (name.equals("") || categoryList.contains(name)) {
             if (name.equals("")) {
                 System.out.println("A category name cannot be blank");
@@ -30,15 +35,17 @@ public class Categories {
         categoryList.add(name);
     }
 
-    public static void showAllCategories() {
+    public void showAllCategories() {
         for (int i = 0; i < categoryList.size(); i++) {
             System.out.println(categoryNumber.get(i) + ")" + " " + categoryList.get(i));
         }
-        System.out.println("Enter category number to edit the category");
+        if (categoryList.size() > 0) {
+            System.out.println("Enter category number to edit the category");
+        }
     }
 
-    public static void editCategory(String i) {
-        System.out.println("Press 'r' to rename, 'x' to delete, 'o' to go back");
+    public void editCategory(String i) {
+        System.out.println("Press 'r' to rename, 'x' to delete, 'i' to add a new item, or any key to go back");
         String edit = input.nextLine();
         switch (edit) {
             case "r":
@@ -46,13 +53,16 @@ public class Categories {
                 String rename = input.nextLine();
                 checkRename(Integer.parseInt(i), rename);
             case "x":
-                categoryList.remove(Integer.parseInt(i) - 1);
-                new Home();
-            case "o":
-                new Home();
+                int ind = Integer.parseInt(i) - 1;
+                categoryList.remove(ind);
+                categoryNumber.remove(ind);
+                home.greetings();
+            default:
+                home.greetings();
         }
     }
-    private static void checkRename(int i, String name) {
+
+    private void checkRename(int i, String name) {
         while (name.equals("") || categoryList.contains(name)) {
             if (name.equals("")) {
                 System.out.println("A category name cannot be blank");
@@ -63,6 +73,10 @@ public class Categories {
             name = input.nextLine();
         }
         categoryList.set(i - 1, name);
-        new Home();
+        home.greetings();
+    }
+
+    public ArrayList<String> getCategoryNumber() {
+        return categoryNumber;
     }
 }
