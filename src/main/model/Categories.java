@@ -5,8 +5,8 @@ import ui.EditCategory;
 import java.util.ArrayList;
 
 public class Categories {
-    private ArrayList<String> categoryList = new ArrayList<>();
-    private ArrayList<String> categoryNumber = new ArrayList<>();
+    private ArrayList<String> categoryName = new ArrayList<>();
+    private ArrayList<String> categoryIndex = new ArrayList<>();
     private EditCategory page;
 
     public Categories(EditCategory page) {
@@ -14,21 +14,21 @@ public class Categories {
     }
 
     public void add(String name) {
-        page.invalidCategory(name);
-        categoryNumber.add(String.valueOf(categoryList.size() + 1));
-        categoryList.add(name);
+        String finalName = page.invalidCategory(name);
+        categoryIndex.add(String.valueOf(categoryName.size() + 1));
+        categoryName.add(finalName);
     }
 
     public void rename(int i, String name) {
-        page.invalidCategory(name);
-        categoryList.set(i - 1, name);
+        String finalName = page.invalidCategory(name);
+        categoryName.set(i - 1, finalName);
     }
 
-    public ArrayList<String> getCategoryNumber() {
-        return categoryNumber;
+    public ArrayList<String> getCategoryIndex() {
+        return categoryIndex;
     }
 
-    public ArrayList<String> getCategoryList() {
-        return categoryList;
+    public ArrayList<String> getCategoryName() {
+        return categoryName;
     }
 }

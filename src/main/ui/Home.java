@@ -1,9 +1,5 @@
 package ui;
 
-import model.Categories;
-import ui.EditCategory;
-import model.Items;
-
 import java.util.Scanner;
 
 public class Home {
@@ -11,7 +7,6 @@ public class Home {
     private String button;
     private Expireminder currentExpireminder;
     private EditCategory categoryPage;
-    private Categories category;
 
     public Home(Expireminder current) {
         this.currentExpireminder = current;
@@ -22,9 +17,9 @@ public class Home {
         System.out.println("Hello " + currentExpireminder.getAccount().getName() + "!");
         System.out.println("Press 'e' to edit profile");
         System.out.println("=========================================================================================");
-        System.out.println("You have: " + Items.nc + " items in good condition");
-        System.out.println(Items.ok + " items expiring soon");
-        System.out.println(Items.ex + " items expired");
+        System.out.println("You have: " + "0" + " items in good condition");
+        System.out.println("0" + " items expiring soon");
+        System.out.println("0" + " items expired");
         System.out.println("~ Categories ~");
         System.out.println("Press '+' to add new category");
         categoryPage.showAllCategories();

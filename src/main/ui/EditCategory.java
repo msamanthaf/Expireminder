@@ -1,6 +1,7 @@
 package ui;
 
 import model.Categories;
+import model.Items;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,10 +17,10 @@ public class EditCategory {
     }
 
     public void showAllCategories() {
-        for (int i = 0; i < category.getCategoryList().size(); i++) {
-            System.out.println(category.getCategoryNumber().get(i) + ")" + " " + category.getCategoryList().get(i));
+        for (int i = 0; i < category.getCategoryName().size(); i++) {
+            System.out.println(category.getCategoryIndex().get(i) + ")" + " " + category.getCategoryName().get(i));
         }
-        if (category.getCategoryList().size() > 0) {
+        if (category.getCategoryName().size() > 0) {
             System.out.println("Enter category number to edit the category");
         }
     }
@@ -31,7 +32,7 @@ public class EditCategory {
     }
 
     public void modifyCategory(String i) {
-        System.out.println("Press 'r' to rename, 'x' to delete, 'i' to add a new item, or any key to go back");
+        System.out.println("Press 'r' to rename, 'x' to delete, '+' to add a new item, or any key to go back");
         String edit = input.nextLine();
         switch (edit) {
             case "r":
@@ -41,27 +42,80 @@ public class EditCategory {
                 home.greetings();
             case "x":
                 int ind = Integer.parseInt(i) - 1;
-                category.getCategoryList().remove(ind);
-                category.getCategoryNumber().remove(ind);
+                category.getCategoryName().remove(ind);
+                category.getCategoryIndex().remove(ind);
+                home.greetings();
+            case "+":
+                addItem();
                 home.greetings();
             default:
                 home.greetings();
         }
     }
 
-    public void invalidCategory(String name) {
-        while (name.equals("") || category.getCategoryList().contains(name)) {
+    public String invalidCategory(String name) {
+        while (name.equals("") || category.getCategoryName().contains(name)) {
             if (name.equals("")) {
                 System.out.println("A category name cannot be blank");
-            } else if (category.getCategoryList().contains(name)) {
+            } else if (category.getCategoryName().contains(name)) {
                 System.out.println("Category name cannot be the same as existing ones");
             }
             System.out.println("Category name:");
             name = input.nextLine();
         }
+        String finalName = name;
+        return finalName;
     }
 
     public ArrayList<String> getCategory() {
-        return category.getCategoryNumber();
+        return category.getCategoryIndex();
     }
+
+    public void addItem() {
+        System.out.println("Item name:");
+        String name = input.nextLine();
+        String finalName = invalidString(name);
+
+        System.out.println("Quantity:");
+        String quantity = input.nextLine();
+        Integer finalQuantity = invalidQuantity(quantity);
+
+        System.out.println("Expiry date:");
+        String date = input.nextLine();
+        String finalDate = invalidDate(date);
+
+        Items item = new Items(finalName, finalQuantity, finalDate);
+    }
+
+    public String invalidString(String name) {
+        while (name.equals("")) {
+            System.out.println("An item name cannot be blank");
+            System.out.println("Item name:");
+            name = input.nextLine();
+        }
+        return name;
+    }
+
+    public Integer invalidQuantity(String quantity) {
+        while (quantity.equals("") || (!isInteger(quantity, quantity.length())) || (Integer.parseInt(quantity) <= 0)) {
+            System.out.println("Please enter a number > 0");
+            System.out.println("Quantity:");
+            quantity = input.nextLine();
+        }
+        return Integer.parseInt(quantity);
+    }
+
+    public boolean isInteger(String str, int n) {
+        for (int i = 0; i < n; i++) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private String invalidDate(String date) {
+        return date;
+    }
+
 }
