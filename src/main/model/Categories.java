@@ -1,27 +1,28 @@
 package model;
 
-import ui.EditCategory;
-
 import java.util.ArrayList;
 
 public class Categories {
-    private ArrayList<String> categoryName = new ArrayList<>();
-    private ArrayList<String> categoryIndex = new ArrayList<>();
-    private EditCategory page;
+    private ArrayList<String> categoryName;
+    private ArrayList<String> categoryIndex;
 
-    public Categories(EditCategory page) {
-        this.page = page;
+    public Categories() {
+        categoryName = new ArrayList<>();
+        categoryIndex = new ArrayList<>();
     }
 
     public void add(String name) {
-        String finalName = page.invalidCategory(name);
         categoryIndex.add(String.valueOf(categoryName.size() + 1));
-        categoryName.add(finalName);
+        categoryName.add(name);
     }
 
     public void rename(int i, String name) {
-        String finalName = page.invalidCategory(name);
-        categoryName.set(i - 1, finalName);
+        categoryName.set(i - 1, name);
+    }
+
+    public void delete(int index) {
+        categoryName.remove(index);
+        categoryIndex.remove(getCategoryIndex().size() - 1);
     }
 
     public ArrayList<String> getCategoryIndex() {

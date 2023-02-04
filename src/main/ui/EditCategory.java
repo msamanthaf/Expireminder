@@ -13,7 +13,7 @@ public class EditCategory {
 
     public EditCategory(Home home) {
         this.home = home;
-        category = new Categories(this);
+        category = new Categories();
     }
 
     public void showAllCategories() {
@@ -28,7 +28,8 @@ public class EditCategory {
     public void addCategory() {
         System.out.println("Category name:");
         String categoryName = input.nextLine();
-        category.add(categoryName);
+        String finalName = invalidCategory(categoryName);
+        category.add(finalName);
     }
 
     public void modifyCategory(String i) {
@@ -38,12 +39,12 @@ public class EditCategory {
             case "r":
                 System.out.println("Rename category to: ");
                 String rename = input.nextLine();
-                category.rename(Integer.parseInt(i), rename);
+                String finalName = invalidCategory(rename);
+                category.rename(Integer.parseInt(i), finalName);
                 home.greetings();
             case "x":
-                int ind = Integer.parseInt(i) - 1;
-                category.getCategoryName().remove(ind);
-                category.getCategoryIndex().remove(ind);
+                int index = Integer.parseInt(i) - 1;
+                category.delete(index);
                 home.greetings();
             case "+":
                 addItem();
@@ -63,8 +64,7 @@ public class EditCategory {
             System.out.println("Category name:");
             name = input.nextLine();
         }
-        String finalName = name;
-        return finalName;
+        return name;
     }
 
     public ArrayList<String> getCategory() {
