@@ -50,4 +50,17 @@ public class CategoriesTest {
         assertEquals("1", category2.getCategoryIndex().get(0));
     }
 
+    @Test
+    void testAddItem(){
+        String name = "Name";
+        Integer quantity = 1;
+        String date = "02/04/2023";
+        Items item = new Items(name, quantity, date);
+        category1.add("Category 1");
+        category1.add("Category 2");
+        category1.addItem(item);
+        assertEquals(1, category1.getCategoryItems().size());
+        assertEquals(item, category1.getCategoryItems().get(0));
+    }
+
 }
