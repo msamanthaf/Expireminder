@@ -1,17 +1,6 @@
 package model;
 
-import ui.EditCategory;
-
-import java.util.ArrayList;
-
 public class Items {
-    private EditCategory page;
-    private Categories category;
-    private ArrayList<String> itemIndex = new ArrayList<>();
-    private ArrayList<String> itemName = new ArrayList<>();
-    private ArrayList<Integer> itemQuantity = new ArrayList<>();
-    private ArrayList<String> itemDate = new ArrayList<>();
-
     private String name;
     private int quantity;
     private String date;

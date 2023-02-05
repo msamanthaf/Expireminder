@@ -63,7 +63,7 @@ public class EditCategory {
                 category.delete(index);
                 home.greetings();
             case "+":
-                addItem();
+                addItem(Integer.parseInt(i));
                 home.greetings();
             default:
                 home.greetings();
@@ -87,7 +87,7 @@ public class EditCategory {
         return category.getCategoryIndex();
     }
 
-    public void addItem() {
+    public void addItem(Integer i) {
         System.out.println("Item name:");
         String name = input.nextLine();
         String finalName = invalidString(name);
@@ -101,7 +101,7 @@ public class EditCategory {
         String finalDate = invalidDate(date);
 
         Items item = new Items(finalName, finalQuantity, finalDate);
-        category.addItem(item);
+        category.addItem(item, i);
     }
 
     public String invalidString(String name) {

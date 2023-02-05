@@ -5,17 +5,21 @@ import java.util.ArrayList;
 public class Categories {
     private ArrayList<String> categoryName;
     private ArrayList<String> categoryIndex;
-    private ArrayList<Items> categoryItems;
+    private ArrayList<ArrayList<Items>> categoryItems;
+    private ArrayList<Items> listOfItems;
+    private Items item;
 
     public Categories() {
         categoryName = new ArrayList<>();
         categoryIndex = new ArrayList<>();
         categoryItems = new ArrayList<>();
+        listOfItems = new ArrayList<>();
     }
 
     public void add(String name) {
         categoryIndex.add(String.valueOf(categoryName.size() + 1));
         categoryName.add(name);
+        categoryItems.add(new ArrayList<>());
     }
 
     public void rename(int i, String name) {
@@ -25,10 +29,13 @@ public class Categories {
     public void delete(int index) {
         categoryName.remove(index);
         categoryIndex.remove(getCategoryIndex().size() - 1);
+        categoryItems.remove(index);
     }
 
-    public void addItem(Items i) {
-        categoryItems.add(i);
+    public void addItem(Items i, Integer category) {
+        ArrayList<Items> items1 = categoryItems.get(category - 1);
+        items1.add(i);
+        categoryItems.set(category - 1, items1);
     }
 
     public ArrayList<String> getCategoryIndex() {
@@ -39,7 +46,7 @@ public class Categories {
         return categoryName;
     }
 
-    public ArrayList<Items> getCategoryItems() {
+    public ArrayList<ArrayList<Items>> getCategoryItems() {
         return categoryItems;
     }
 }
