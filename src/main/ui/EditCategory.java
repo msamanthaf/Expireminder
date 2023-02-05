@@ -65,7 +65,7 @@ public class EditCategory {
     public void modifyCategory(String i) {
         System.out.println("Press 'r' to rename, 'x' to delete, '+' to add a new item, other keys to go back");
         if (doesNotExist(category.getCategoryItems().get(Integer.parseInt(i) - 1))) {
-            System.out.println("or Enter item number to modify");
+            System.out.println("or Enter item number to view and modify");
         }
         String edit = input.nextLine();
         inputCases(i, edit);
@@ -90,15 +90,72 @@ public class EditCategory {
                 if (edit.equals("")) {
                     home.greetings();
                 } else if (isInteger(edit, edit.length()) && containsIndex(listOfItems, Integer.valueOf(edit))) {
-                    editItem();
+                    editItem(Integer.valueOf(i), Integer.valueOf(edit));
                 } else {
                     home.greetings();
                 }
         }
     }
 
-    private void editItem() {
-        System.out.println("TEEHEE");
+    private void editItem(Integer theCategory, Integer item) {
+        ArrayList<Items> arrayOfItems = category.getCategoryItems().get(theCategory - 1);
+        Items selected = arrayOfItems.get(item - 1);
+        System.out.println("Item: " + selected.getName());
+        System.out.println("Quantity: " + selected.getQuantity());
+        System.out.println("Expires in: " + selected.getDate());
+        System.out.println("                                         ");
+        System.out.println("Press 'o' to edit item info, 'x' to delete item, '<' to go back");
+        String enter = input.nextLine();
+        enterCases(enter, theCategory, item);
+    }
+
+    private void enterCases(String enter, Integer theCategory, Integer theItem) {
+        switch (enter) {
+            case "o":
+                renameItem(theCategory, theItem);
+            case "x":
+                deleteItem(theCategory, theItem);
+            case "<":
+                home.greetings();
+            default:
+                editItem(theCategory, theItem);
+        }
+    }
+
+    private void deleteItem(Integer theCategory, Integer theItem) {
+        ArrayList<Items> arrayOfItems = category.getCategoryItems().get(theCategory - 1);
+        arrayOfItems.remove(theItem - 1);
+        home.greetings();
+    }
+
+    private void renameItem(Integer theCategory, Integer theItem) {
+        ArrayList<Items> arrayOfItems = category.getCategoryItems().get(theCategory - 1);
+        Items selected = arrayOfItems.get(theItem - 1);
+        System.out.println("Enter the number of what you would like to modify: 1. Name 2. Quantity 3. Expiry Date");
+        String rename = input.nextLine();
+        switch (rename) {
+            case "1":
+                System.out.println("Enter new item name:");
+                String newName = input.nextLine();
+                String validName = invalidString(newName);
+                selected.setName(validName);
+                editItem(theCategory, theItem);
+            case "2":
+                System.out.println("Enter new item quantity:");
+                String newQuantity = input.nextLine();
+                Integer validQuantity = invalidQuantity(newQuantity);
+                selected.setQuantity(validQuantity);
+                editItem(theCategory, theItem);
+            case "3":
+                System.out.println("Enter new item expiry date:");
+                String newDate = input.nextLine();
+                String validDate = invalidDate(newDate);
+                selected.setDate(validDate);
+                editItem(theCategory, theItem);
+            default:
+                String enter = input.nextLine();
+                enterCases(enter, theCategory, theItem);
+        }
     }
 
     public boolean containsIndex(ArrayList<Items> listOfItems, Integer key) {
