@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class Categories {
     private ArrayList<String> categoryName;
     private ArrayList<String> categoryIndex;
+    private ArrayList<Items> categoryItems;
 
     public Categories() {
         categoryName = new ArrayList<>();
         categoryIndex = new ArrayList<>();
+        categoryItems = new ArrayList<>();
     }
 
     public void add(String name) {

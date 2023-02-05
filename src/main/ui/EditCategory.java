@@ -3,6 +3,9 @@ package ui;
 import model.Categories;
 import model.Items;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,6 +13,7 @@ public class EditCategory {
     private Scanner input = new Scanner(System.in);
     private Categories category;
     private Home home;
+    private String dateFormat;
 
     public EditCategory(Home home) {
         this.home = home;
@@ -80,7 +84,7 @@ public class EditCategory {
         String quantity = input.nextLine();
         Integer finalQuantity = invalidQuantity(quantity);
 
-        System.out.println("Expiry date:");
+        System.out.println("Expiry date: (MM/dd/yyyy)");
         String date = input.nextLine();
         String finalDate = invalidDate(date);
 
@@ -115,7 +119,23 @@ public class EditCategory {
     }
 
     private String invalidDate(String date) {
+        while (!dateFormat(date)) {
+            System.out.println("Please enter a valid date (MM/dd/yyyy)");
+            System.out.println("Expiry Date:");
+            date = input.nextLine();
+        }
         return date;
     }
 
+    private boolean dateFormat(String date) {
+        dateFormat = "MM/dd/yyyy";
+        DateFormat sdf = new SimpleDateFormat(dateFormat);
+        sdf.setLenient(false);
+        try {
+            sdf.parse(date);
+        } catch (ParseException e) {
+            return false;
+        }
+        return true;
+    }
 }
