@@ -28,16 +28,22 @@ public class Home {
 
     public void button() {
         button = input.next();
-        if (button.equals("e")) {
-            currentExpireminder.editProfile();
-        } else if (button.equals("+")) {
-            categoryPage.addCategory();
-            greetings();
-        } else if (categoryPage.getCategory().contains(button)) {
-            categoryPage.modifyCategory(button);
-        } else {
-            button = input.nextLine();
-            button();
+        switch (button) {
+            case "e":
+                currentExpireminder.editProfile();
+                break;
+            case "+":
+                categoryPage.addCategory();
+                greetings();
+                break;
+            default:
+                if (categoryPage.getCategory().contains(button)) {
+                    categoryPage.modifyCategory(button);
+                } else {
+                    button = input.nextLine();
+                    button();
+                    break;
+                }
         }
     }
 }

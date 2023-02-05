@@ -63,11 +63,15 @@ public class EditCategory {
     }
 
     public void modifyCategory(String i) {
-        System.out.println("Press 'r' to rename, 'x' to delete, '+' to add a new item, or any key to go back");
+        System.out.println("Press 'r' to rename, 'x' to delete, '+' to add a new item, other keys to go back");
         if (doesNotExist(category.getCategoryItems().get(Integer.parseInt(i) - 1))) {
-            System.out.println("Enter item number to edit");
+            System.out.println("or Enter item number to modify");
         }
         String edit = input.nextLine();
+        inputCases(i, edit);
+    }
+
+    private void inputCases(String i, String edit) {
         switch (edit) {
             case "r":
                 System.out.println("Rename category to: ");
@@ -81,10 +85,30 @@ public class EditCategory {
                 home.greetings();
             case "+":
                 addItem(Integer.parseInt(i));
-                home.greetings();
             default:
-                home.greetings();
+                ArrayList<Items> listOfItems = category.getCategoryItems().get(Integer.parseInt(i) - 1);
+                if (edit.equals("")) {
+                    home.greetings();
+                } else if (isInteger(edit, edit.length()) && containsIndex(listOfItems, Integer.valueOf(edit))) {
+                    editItem();
+                } else {
+                    home.greetings();
+                }
         }
+    }
+
+    private void editItem() {
+        System.out.println("TEEHEE");
+    }
+
+    public boolean containsIndex(ArrayList<Items> listOfItems, Integer key) {
+        for (Items item : listOfItems) {
+            int indexPosition = listOfItems.indexOf(item);
+            if (indexPosition == key - 1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String invalidCategory(String name) {
