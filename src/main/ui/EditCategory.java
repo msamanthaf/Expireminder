@@ -23,10 +23,22 @@ public class EditCategory {
     public void showAllCategories() {
         for (int i = 0; i < category.getCategoryName().size(); i++) {
             System.out.println(category.getCategoryIndex().get(i) + ")" + " " + category.getCategoryName().get(i));
+            if (category.getCategoryItems().size() > 0 && outOfBounds(i)) {
+                System.out.println(category.getCategoryItems().get(i));
+            }
         }
         if (category.getCategoryName().size() > 0) {
             System.out.println("Enter category number to edit the category");
         }
+    }
+
+    private boolean outOfBounds(int i) {
+        try {
+            category.getCategoryItems().get(i);
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+        return true;
     }
 
     public void addCategory() {
@@ -89,6 +101,7 @@ public class EditCategory {
         String finalDate = invalidDate(date);
 
         Items item = new Items(finalName, finalQuantity, finalDate);
+        category.addItem(item);
     }
 
     public String invalidString(String name) {

@@ -27,11 +27,19 @@ public class Categories {
         categoryIndex.remove(getCategoryIndex().size() - 1);
     }
 
+    public void addItem(Items i) {
+        categoryItems.add(i);
+    }
+
     public ArrayList<String> getCategoryIndex() {
         return categoryIndex;
     }
 
     public ArrayList<String> getCategoryName() {
         return categoryName;
+    }
+
+    public ArrayList<Items> getCategoryItems() {
+        return categoryItems;
     }
 }
