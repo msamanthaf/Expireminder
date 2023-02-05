@@ -133,6 +133,10 @@ public class EditCategory {
         Items selected = arrayOfItems.get(theItem - 1);
         System.out.println("Enter the number of what you would like to modify: 1. Name 2. Quantity 3. Expiry Date");
         String rename = input.nextLine();
+        renameSelection(theCategory, theItem, selected, rename);
+    }
+
+    private void renameSelection(Integer theCategory, Integer theItem, Items selected, String rename) {
         switch (rename) {
             case "1":
                 System.out.println("Enter new item name:");
