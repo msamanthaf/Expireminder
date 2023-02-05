@@ -24,12 +24,26 @@ public class EditCategory {
         for (int i = 0; i < category.getCategoryName().size(); i++) {
             System.out.println(category.getCategoryIndex().get(i) + ")" + " " + category.getCategoryName().get(i));
             if (category.getCategoryItems().size() > 0 && outOfBounds(i)) {
-                System.out.println(category.getCategoryItems().get(i));
+                ArrayList<Items> listOfItems = category.getCategoryItems().get(i);
+                for (Items item : listOfItems) {
+                    int indexPosition = listOfItems.indexOf(item);
+                    System.out.println("    " + (indexPosition + 1) + ". " + item.getName() + "  x" + item.getQuantity()
+                            + " ~ Expires in " + item.getDate());
+                }
             }
         }
         if (category.getCategoryName().size() > 0) {
             System.out.println("Enter category number to edit the category");
         }
+    }
+
+    private boolean doesNotExist(ArrayList<Items> listOfItems) {
+        try {
+            listOfItems.get(0).getName();
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+        return true;
     }
 
     private boolean outOfBounds(int i) {
@@ -50,6 +64,9 @@ public class EditCategory {
 
     public void modifyCategory(String i) {
         System.out.println("Press 'r' to rename, 'x' to delete, '+' to add a new item, or any key to go back");
+        if (doesNotExist(category.getCategoryItems().get(Integer.parseInt(i) - 1))) {
+            System.out.println("Enter item number to edit");
+        }
         String edit = input.nextLine();
         switch (edit) {
             case "r":

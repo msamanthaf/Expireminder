@@ -6,14 +6,11 @@ public class Categories {
     private ArrayList<String> categoryName;
     private ArrayList<String> categoryIndex;
     private ArrayList<ArrayList<Items>> categoryItems;
-    private ArrayList<Items> listOfItems;
-    private Items item;
 
     public Categories() {
         categoryName = new ArrayList<>();
         categoryIndex = new ArrayList<>();
         categoryItems = new ArrayList<>();
-        listOfItems = new ArrayList<>();
     }
 
     public void add(String name) {
