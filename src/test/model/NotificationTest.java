@@ -32,7 +32,7 @@ public class NotificationTest {
     void testSendNotification(){
         assertFalse(notification1.getNotified());
         assertFalse(notification2.getNotified());
-        assertTrue(notification3.getNotified());
+        assertFalse(notification3.getNotified());
         assertTrue(notification4.getNotified());
     }
 

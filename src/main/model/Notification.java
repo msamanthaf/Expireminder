@@ -40,7 +40,7 @@ public class Notification {
     }
 
     public void sendNotification(LocalDate currentDate, LocalDate expiryDate) {
-        if (calculateMonth(currentDate, expiryDate) <= monthsBefore) {
+        if (calculateMonth(currentDate, expiryDate) <= monthsBefore && !currentDate.isAfter(expiryDate)) {
             notified = true;
         } else {
             notified = false;

@@ -24,7 +24,7 @@ very useful for anyone who wants to avoid losing their item's worth especially t
 - I would also like to be able to rename, delete, and change the color of each category.
 - I want to be able to add, remove, and edit an item, their quantity, and their expiration date.
 - I want to be able to add the same item with the same name because some quantities might have a different expiry date.
-- Make sure that I am not able to input an expiry date that is in the past.
+- Make sure that I am not going to receive any notifications to a new input item with a date that is in the past.
 - I would like to have a small status icon next to the item represented as: Green means good, 
 Yellow means expires soon (1 month), Red means expired.
 - I want to receive an email notification at the scheduled time (of 1 month).
