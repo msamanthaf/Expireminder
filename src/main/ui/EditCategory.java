@@ -113,12 +113,16 @@ public class EditCategory {
         switch (enter) {
             case "o":
                 renameItem(theCategory, theItem);
+                break;
             case "x":
                 deleteItem(theCategory, theItem);
+                break;
             case "<":
                 home.greetings();
+                break;
             default:
                 editItem(theCategory, theItem);
+                break;
         }
     }
 
@@ -252,5 +256,9 @@ public class EditCategory {
             return false;
         }
         return true;
+    }
+
+    public Categories returnCategory() {
+        return category;
     }
 }

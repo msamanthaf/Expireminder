@@ -6,6 +6,9 @@ public class Categories {
     private ArrayList<String> categoryName;
     private ArrayList<String> categoryIndex;
     private ArrayList<ArrayList<Items>> categoryItems;
+    private ArrayList<Items> goodCondition = new ArrayList<>();
+    private ArrayList<Items> expiringSoon = new ArrayList<>();
+    private ArrayList<Items> expired = new ArrayList<>();
 
     public Categories() {
         categoryName = new ArrayList<>();
@@ -33,6 +36,7 @@ public class Categories {
         ArrayList<Items> items1 = categoryItems.get(category - 1);
         items1.add(i);
         categoryItems.set(category - 1, items1);
+        addStatus(i);
     }
 
     public ArrayList<String> getCategoryIndex() {
@@ -45,5 +49,27 @@ public class Categories {
 
     public ArrayList<ArrayList<Items>> getCategoryItems() {
         return categoryItems;
+    }
+
+    public ArrayList<Items> getGoodCondition() {
+        return goodCondition;
+    }
+
+    public ArrayList<Items> getExpiringSoon() {
+        return expiringSoon;
+    }
+
+    public ArrayList<Items> getExpired() {
+        return expired;
+    }
+
+    public void addStatus(Items i) {
+        if (i.getNotify().getExpired()) {
+            expired.add(i);
+        } else if (i.getNotify().getNotified()) {
+            expiringSoon.add(i);
+        } else {
+            goodCondition.add(i);
+        }
     }
 }
