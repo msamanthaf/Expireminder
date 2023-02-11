@@ -14,6 +14,9 @@ public class EditCategory {
     private Categories category;
     private Home home;
     private String dateFormat;
+    private int goodCondition;
+    private int expiringSoon;
+    private int expired;
 
     public EditCategory(Home home) {
         this.home = home;
@@ -189,10 +192,6 @@ public class EditCategory {
         return name;
     }
 
-    public ArrayList<String> getCategory() {
-        return category.getCategoryIndex();
-    }
-
     public void addItem(Integer i) {
         System.out.println("Item name:");
         String name = input.nextLine();
@@ -258,7 +257,33 @@ public class EditCategory {
         return true;
     }
 
-    public Categories returnCategory() {
-        return category;
+    public void checkStatus() {
+        category.getGoodCondition().clear();
+        category.getExpiringSoon().clear();
+        category.getExpired().clear();
+        for (ArrayList<Items> listOfItems : category.getCategoryItems()) {
+            for (Items item : listOfItems) {
+                category.addStatus(item);
+            }
+        }
+        goodCondition = category.getGoodCondition().size();
+        expiringSoon = category.getExpiringSoon().size();
+        expired = category.getExpired().size();
+    }
+
+    public ArrayList<String> getCategory() {
+        return category.getCategoryIndex();
+    }
+
+    public int getGoodCondition() {
+        return goodCondition;
+    }
+
+    public int getExpiringSoon() {
+        return expiringSoon;
+    }
+
+    public int getExpired() {
+        return expired;
     }
 }

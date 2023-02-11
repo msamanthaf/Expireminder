@@ -39,6 +39,18 @@ public class Categories {
         addStatus(i);
     }
 
+    public void addStatus(Items i) {
+        Notification dummy = new Notification(i.getDate());
+        if (dummy.getExpired()) {
+            expired.add(i);
+        } else if (dummy.getNotified()) {
+            expiringSoon.add(i);
+        } else {
+            goodCondition.add(i);
+        }
+        dummy = null;
+    }
+
     public ArrayList<String> getCategoryIndex() {
         return categoryIndex;
     }
@@ -61,15 +73,5 @@ public class Categories {
 
     public ArrayList<Items> getExpired() {
         return expired;
-    }
-
-    public void addStatus(Items i) {
-        if (i.getNotify().getExpired()) {
-            expired.add(i);
-        } else if (i.getNotify().getNotified()) {
-            expiringSoon.add(i);
-        } else {
-            goodCondition.add(i);
-        }
     }
 }

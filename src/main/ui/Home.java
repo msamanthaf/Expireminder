@@ -17,10 +17,11 @@ public class Home {
         System.out.println("Hello " + currentExpireminder.getAccount().getName() + "!");
         System.out.println("Press 'e' to edit profile");
         System.out.println("=========================================================================================");
-        System.out.println("You have: " + categoryPage.returnCategory().getGoodCondition().size()
+        categoryPage.checkStatus();
+        System.out.println("You have: " + categoryPage.getGoodCondition()
                 + " items in good condition");
-        System.out.println(categoryPage.returnCategory().getExpiringSoon().size() + " items expiring soon");
-        System.out.println(categoryPage.returnCategory().getExpired().size() + " items expired");
+        System.out.println(categoryPage.getExpiringSoon() + " items expiring soon");
+        System.out.println(categoryPage.getExpired() + " items expired");
         System.out.println("~ Categories ~");
         System.out.println("Press '+' to add new category");
         categoryPage.showAllCategories();
