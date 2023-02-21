@@ -48,4 +48,8 @@ public class Home {
                 break;
         }
     }
+
+    public Expireminder getCurrentExpireminder() {
+        return currentExpireminder;
+    }
 }

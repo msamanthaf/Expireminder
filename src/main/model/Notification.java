@@ -28,21 +28,12 @@ public class Notification {
 
     public Integer calculateMonth(LocalDate currentDate, LocalDate expiryDate) {
         Period period = Period.between(currentDate, expiryDate);
-        int month = period.getMonths() + (12 * period.getYears()) + (period.getDays() / 31);
-        monthsLeft = month;
-        return monthsLeft;
-    }
-
-    public Integer getDifference() {
+        monthsLeft = period.getMonths() + (12 * period.getYears()) + (period.getDays() / 31);
         return monthsLeft;
     }
 
     public void sendNotification(LocalDate currentDate, LocalDate expiryDate) {
-        if (calculateMonth(currentDate, expiryDate) <= monthsBefore && !currentDate.isAfter(expiryDate)) {
-            notified = true;
-        } else {
-            notified = false;
-        }
+        notified = calculateMonth(currentDate, expiryDate) <= monthsBefore && !currentDate.isAfter(expiryDate);
     }
 
     public void expired(LocalDate currentDate, LocalDate expiryDate) {
@@ -51,6 +42,10 @@ public class Notification {
         } else {
             expired = false;
         }
+    }
+
+    public Integer getDifference() {
+        return monthsLeft;
     }
 
     public boolean getNotified() {

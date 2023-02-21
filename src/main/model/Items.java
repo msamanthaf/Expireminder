@@ -4,12 +4,17 @@ public class Items {
     private String name;
     private int quantity;
     private String date;
+    private Notification notification;
 
     public Items(String name, Integer quantity, String date) {
         this.name = name;
         this.quantity = quantity;
         this.date = date;
-        new Notification(date);
+        notification = new Notification(date);
+    }
+
+    public Notification getNotification() {
+        return notification;
     }
 
     public String getName() {

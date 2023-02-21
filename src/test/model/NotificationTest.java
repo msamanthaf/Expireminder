@@ -29,7 +29,7 @@ public class NotificationTest {
     }
 
     @Test
-    void testSendNotification(){
+    void testSendNotification() {
         assertFalse(notification1.getNotified());
         assertFalse(notification2.getNotified());
         assertFalse(notification3.getNotified());
@@ -37,7 +37,7 @@ public class NotificationTest {
     }
 
     @Test
-    void testExpired(){
+    void testExpired() {
         assertFalse(notification1.getExpired());
         assertFalse(notification2.getExpired());
         assertTrue(notification3.getExpired());
