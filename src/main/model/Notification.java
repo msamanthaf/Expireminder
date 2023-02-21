@@ -13,12 +13,14 @@ public class Notification {
     private Boolean notified = false;
     private Boolean expired = false;
     private Integer monthsLeft;
+    private Boolean exception = false;
 
     public Notification(String date) {
         DateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy");
         try {
             expiryTime = inputFormat.parse(date).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         } catch (Exception e) {
+            exception = true;
             //Input already guarded in UI
         }
         currentTime = LocalDate.now();
@@ -54,5 +56,9 @@ public class Notification {
 
     public boolean getExpired() {
         return expired;
+    }
+
+    public boolean getException() {
+        return exception;
     }
 }

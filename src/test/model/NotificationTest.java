@@ -10,6 +10,7 @@ public class NotificationTest {
     Notification notification2;
     Notification notification3;
     Notification notification4;
+    Notification notification5;
 
     @BeforeEach
     void RunBefore() {
@@ -17,6 +18,16 @@ public class NotificationTest {
         notification2 = new Notification("2/12/2024");
         notification3 = new Notification("12/1/2022");
         notification4 = new Notification("3/31/2023");
+        notification5 = new Notification("2/31/2023");
+    }
+
+    @Test
+    void testNotificationException(){
+        assertFalse(notification1.getException());
+        assertFalse(notification2.getException());
+        assertFalse(notification3.getException());
+        assertFalse(notification4.getException());
+        assertTrue(notification5.getException());
     }
 
     @Test
