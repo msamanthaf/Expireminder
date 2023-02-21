@@ -1,6 +1,7 @@
 package model;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -19,7 +20,7 @@ public class Notification {
         DateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy");
         try {
             expiryTime = inputFormat.parse(date).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        } catch (Exception e) {
+        } catch (ParseException e) {
             exception = true;
             //Input already guarded in UI
         }

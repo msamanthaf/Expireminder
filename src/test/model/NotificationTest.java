@@ -18,7 +18,7 @@ public class NotificationTest {
         notification2 = new Notification("2/12/2024");
         notification3 = new Notification("12/1/2022");
         notification4 = new Notification("3/31/2023");
-        notification5 = new Notification("2/31/2023");
+        notification5 = new Notification("12345");
     }
 
     @Test
