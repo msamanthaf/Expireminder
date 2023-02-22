@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+// Represents a category having a list of names, list of index, and list of items
 public class Categories {
     private ArrayList<String> categoryName;
     private ArrayList<String> categoryIndex;
@@ -10,28 +11,37 @@ public class Categories {
     private ArrayList<Items> expiringSoon = new ArrayList<>();
     private ArrayList<Items> expired = new ArrayList<>();
 
+    // EFFECTS: creates new empty list of names, index, and items
     public Categories() {
         categoryName = new ArrayList<>();
         categoryIndex = new ArrayList<>();
         categoryItems = new ArrayList<>();
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds new category name and its index into list along with an empty list of items
     public void add(String name) {
         categoryIndex.add(String.valueOf(categoryName.size() + 1));
         categoryName.add(name);
         categoryItems.add(new ArrayList<>());
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the new name of the given element
     public void rename(int i, String name) {
         categoryName.set(i - 1, name);
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes an index from list of name, index, and items
     public void delete(int index) {
         categoryName.remove(index);
         categoryIndex.remove(getCategoryIndex().size() - 1);
         categoryItems.remove(index);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds given item into list of items
     public void addItem(Items i, Integer category) {
         ArrayList<Items> items1 = categoryItems.get(category - 1);
         items1.add(i);
@@ -39,6 +49,8 @@ public class Categories {
         addStatus(i);
     }
 
+    // MODIFIES: expired, expiringSoon, goodCondition
+    // EFFECTS: creates new notification for this item and sort it into a group
     public void addStatus(Items i) {
         Notification dummy = new Notification(i.getDate());
         if (dummy.getExpired()) {
@@ -48,7 +60,6 @@ public class Categories {
         } else {
             goodCondition.add(i);
         }
-        dummy = null;
     }
 
     public ArrayList<String> getCategoryIndex() {

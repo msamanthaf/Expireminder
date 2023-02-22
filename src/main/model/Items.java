@@ -1,11 +1,14 @@
 package model;
 
+// Represents an item inside a category with a name, quantity, date, and notification
 public class Items {
     private String name;
     private int quantity;
     private String date;
     private Notification notification;
 
+    // REQUIRES: valid name, quantity, and date (guarded in ui)
+    // EFFECTS: stores name, quantity, and date, creates new notification
     public Items(String name, Integer quantity, String date) {
         this.name = name;
         this.quantity = quantity;

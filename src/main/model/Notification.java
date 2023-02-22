@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 
+// Represents a notification for each item with an input date and local date of current time
 public class Notification {
     private LocalDate currentTime;
     private LocalDate expiryTime;
@@ -16,6 +17,8 @@ public class Notification {
     private Integer monthsLeft;
     private Boolean exception = false;
 
+    // REQUIRES: valid date (guarded in UI)
+    // EFFECTS: sets currentTime into current local date, notified is set to the default of false
     public Notification(String date) {
         DateFormat inputFormat = new SimpleDateFormat("MM/dd/yyyy");
         try {
@@ -30,22 +33,24 @@ public class Notification {
         expired(currentTime, expiryTime);
     }
 
+    // MODIFIES: monthsLeft
+    // EFFECTS: returns how many months left from now to a given date
     public Integer calculateMonth(LocalDate currentDate, LocalDate expiryDate) {
         Period period = Period.between(currentDate, expiryDate);
         monthsLeft = period.getMonths() + (12 * period.getYears()) + (period.getDays() / 31);
         return monthsLeft;
     }
 
+    // MODIFIES: notified
+    // EFFECTS: notified is set to true if monthsLeft is less than or equals to MONTHS_BEFORE
     public void sendNotification(LocalDate currentDate, LocalDate expiryDate) {
         notified = calculateMonth(currentDate, expiryDate) <= MONTHS_BEFORE && !currentDate.isAfter(expiryDate);
     }
 
+    // MODIFIES = expired
+    // EFFECTS = returns true if expiryDate is in the past
     public void expired(LocalDate currentDate, LocalDate expiryDate) {
-        if (currentDate.isAfter(expiryDate)) {
-            expired = true;
-        } else {
-            expired = false;
-        }
+        expired = currentDate.isAfter(expiryDate);
     }
 
     public boolean getNotified() {

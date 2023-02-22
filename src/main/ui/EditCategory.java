@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// User interaction with category area
 public class EditCategory {
     private Scanner input = new Scanner(System.in);
     private Categories category;
@@ -18,11 +19,14 @@ public class EditCategory {
     private int expiringSoon;
     private int expired;
 
+    // REQUIRES: the previous Home page
+    // EFFECTS: initialize a new area for storing categories and items
     public EditCategory(Home home) {
         this.home = home;
         category = new Categories();
     }
 
+    // EFFECTS: shows the number of items in the list so far
     public void showAllCategories() {
         for (int i = 0; i < category.getCategoryName().size(); i++) {
             System.out.println(category.getCategoryIndex().get(i) + ")" + " " + category.getCategoryName().get(i));
@@ -40,15 +44,7 @@ public class EditCategory {
         }
     }
 
-    private boolean doesNotExist(ArrayList<Items> listOfItems) {
-        try {
-            listOfItems.get(0).getName();
-        } catch (IndexOutOfBoundsException e) {
-            return false;
-        }
-        return true;
-    }
-
+    // EFFECTS: checks whether the i-th element exists or not
     private boolean outOfBounds(int i) {
         try {
             category.getCategoryItems().get(i);
@@ -58,6 +54,8 @@ public class EditCategory {
         return true;
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates new category and adds it into category list
     public void addCategory() {
         System.out.println("Category name:");
         String categoryName = input.nextLine();
@@ -65,15 +63,18 @@ public class EditCategory {
         category.add(finalName);
     }
 
+    // MODIFIES: this
+    // EFFECTS: prints the available options for the chosen category and takes user input
     public void modifyCategory(String i) {
         System.out.println("Press 'r' to rename, 'x' to delete, '+' to add a new item, other keys to go back");
-        if (doesNotExist(category.getCategoryItems().get(Integer.parseInt(i) - 1))) {
+        if (!category.getCategoryItems().isEmpty()) {
             System.out.println("or Enter item number to view and modify");
         }
         String edit = input.nextLine();
         inputCases(i, edit);
     }
 
+    // EFFECTS: run tasks based on user input
     private void inputCases(String i, String edit) {
         switch (edit) {
             case "r":
@@ -92,7 +93,7 @@ public class EditCategory {
                 ArrayList<Items> listOfItems = category.getCategoryItems().get(Integer.parseInt(i) - 1);
                 if (edit.equals("")) {
                     home.greetings();
-                } else if (isInteger(edit, edit.length()) && containsIndex(listOfItems, Integer.valueOf(edit))) {
+                } else if (isInteger(edit, edit.length()) && listOfItems.size() >= Integer.parseInt(edit)) {
                     editItem(Integer.valueOf(i), Integer.valueOf(edit));
                 } else {
                     home.greetings();
@@ -100,6 +101,8 @@ public class EditCategory {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: prints the item info and takes user input to modify item info
     private void editItem(Integer theCategory, Integer item) {
         ArrayList<Items> arrayOfItems = category.getCategoryItems().get(theCategory - 1);
         Items selected = arrayOfItems.get(item - 1);
@@ -112,6 +115,7 @@ public class EditCategory {
         enterCases(enter, theCategory, item);
     }
 
+    // EFFECTS: run tasks based on user input
     private void enterCases(String enter, Integer theCategory, Integer theItem) {
         switch (enter) {
             case "o":
@@ -129,12 +133,16 @@ public class EditCategory {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: removes theItem from theCategory
     private void deleteItem(Integer theCategory, Integer theItem) {
         ArrayList<Items> arrayOfItems = category.getCategoryItems().get(theCategory - 1);
         arrayOfItems.remove(theItem - 1);
         home.greetings();
     }
 
+    // MODIFIES: this
+    // EFFECTS: prints the options of changing certain information for theItem from theCategory
     private void renameItem(Integer theCategory, Integer theItem) {
         ArrayList<Items> arrayOfItems = category.getCategoryItems().get(theCategory - 1);
         Items selected = arrayOfItems.get(theItem - 1);
@@ -143,6 +151,8 @@ public class EditCategory {
         renameSelection(theCategory, theItem, selected, rename);
     }
 
+    // MODIFIES: this
+    // EFFECTS: takes new user input for theItem from theCategory
     private void renameSelection(Integer theCategory, Integer theItem, Items selected, String rename) {
         switch (rename) {
             case "1":
@@ -169,16 +179,8 @@ public class EditCategory {
         }
     }
 
-    public boolean containsIndex(ArrayList<Items> listOfItems, Integer key) {
-        for (Items item : listOfItems) {
-            int indexPosition = listOfItems.indexOf(item);
-            if (indexPosition == key - 1) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    // MODIFIES: name
+    // EFFECTS: checks if name has been used as another category label
     public String invalidCategory(String name) {
         while (name.equals("") || category.getCategoryName().contains(name)) {
             if (name.equals("")) {
@@ -192,6 +194,8 @@ public class EditCategory {
         return name;
     }
 
+    // MODIFIES: this
+    // EFFECTS: prints instructions, takes user input, and stores data to category
     public void addItem(Integer i) {
         System.out.println("Item name:");
         String name = input.nextLine();
@@ -209,6 +213,8 @@ public class EditCategory {
         category.addItem(item, i);
     }
 
+    // MODIFIES: name
+    // EFFECTS: prints comments if input is blank
     public String invalidString(String name) {
         while (name.equals("")) {
             System.out.println("An item name cannot be blank");
@@ -218,6 +224,8 @@ public class EditCategory {
         return name;
     }
 
+    // MODIFIES: quantity
+    // EFFECTS: retakes user input if input is empty or not a number greater than 0
     public Integer invalidQuantity(String quantity) {
         while (quantity.equals("") || (!isInteger(quantity, quantity.length())) || (Integer.parseInt(quantity) <= 0)) {
             System.out.println("Please enter a number > 0");
@@ -227,6 +235,7 @@ public class EditCategory {
         return Integer.parseInt(quantity);
     }
 
+    // EFFECTS: checks whether input is fully an integer
     public boolean isInteger(String str, int n) {
         for (int i = 0; i < n; i++) {
             if (!Character.isDigit(str.charAt(i))) {
@@ -236,6 +245,8 @@ public class EditCategory {
         return true;
     }
 
+    // MODIFIES: date
+    // EFFECTS: prints comments and retakes user input if input is not a valid date
     private String invalidDate(String date) {
         while (!dateFormat(date)) {
             System.out.println("Please enter a valid date (MM/dd/yyyy)");
@@ -245,6 +256,7 @@ public class EditCategory {
         return date;
     }
 
+    // EFFECTS: checks the validity of the input date
     private boolean dateFormat(String date) {
         dateFormat = "MM/dd/yyyy";
         DateFormat sdf = new SimpleDateFormat(dateFormat);
@@ -257,6 +269,8 @@ public class EditCategory {
         return true;
     }
 
+    // MODIFIES: this
+    // EFFECTS: sorts every item present in category and display the number items inside each group
     public void checkStatus() {
         category.getGoodCondition().clear();
         category.getExpiringSoon().clear();

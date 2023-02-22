@@ -12,15 +12,14 @@ public class Expireminder {
     private Account currentAccount;
     private Home home;
 
-    // EFFECTS: Runs the first window
+    // EFFECTS: runs the first window
     public Expireminder() {
         System.out.println("Welcome! Let's get started");
         signUp();
     }
 
-    // First window to input name and email address
     // MODIFIES: this
-    // EFFECTS: Gets user input (name and email)
+    // EFFECTS: stores user input of name and email into Account
     public void signUp() {
         System.out.println("Enter your name:");
         inputName = input.nextLine();
@@ -32,6 +31,8 @@ public class Expireminder {
         home.greetings();
     }
 
+    // MODIFIES: this, Account
+    // EFFECTS: modifies user input of name and email and update the info into Account
     public void editProfile() {
         System.out.println("New Name:");
         inputName = input.nextLine();
@@ -42,9 +43,8 @@ public class Expireminder {
         home.greetings();
     }
 
-    // REQUIRES: A non-empty string
-    // MODIFIES: name & email
-    // EFFECTS: Re-obtains user input if input string is empty
+    // MODIFIES: name, email
+    // EFFECTS: re-obtains user input if input string is empty
     private void checkValid(String name, String email) {
         while (name.equals("") || email.equals("")) {
             System.out.println("Please enter a valid name and/or email address");
