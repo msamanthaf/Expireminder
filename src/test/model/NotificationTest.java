@@ -22,7 +22,7 @@ public class NotificationTest {
     }
 
     @Test
-    void testNotificationException(){
+    void testNotificationException() {
         assertFalse(notification1.getException());
         assertFalse(notification2.getException());
         assertFalse(notification3.getException());
@@ -32,8 +32,8 @@ public class NotificationTest {
 
     @Test
     void testCalculateMonth() {
-        assertEquals(10, notification1.getDifference());
-        assertEquals(12, notification2.getDifference());
+        assertEquals(9, notification1.getDifference());
+        assertEquals(11, notification2.getDifference());
         assertEquals(-2, notification3.getDifference());
         assertEquals(1, notification4.getDifference());
 

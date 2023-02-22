@@ -10,7 +10,7 @@ import java.time.ZoneId;
 public class Notification {
     private LocalDate currentTime;
     private LocalDate expiryTime;
-    private Integer monthsBefore = 1;
+    private static Integer MONTHS_BEFORE = 1;
     private Boolean notified = false;
     private Boolean expired = false;
     private Integer monthsLeft;
@@ -22,6 +22,7 @@ public class Notification {
             expiryTime = inputFormat.parse(date).toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         } catch (ParseException e) {
             exception = true;
+            expiryTime = LocalDate.now(); //To prevent null pointer errors
             //Input already guarded in UI
         }
         currentTime = LocalDate.now();
@@ -36,7 +37,7 @@ public class Notification {
     }
 
     public void sendNotification(LocalDate currentDate, LocalDate expiryDate) {
-        notified = calculateMonth(currentDate, expiryDate) <= monthsBefore && !currentDate.isAfter(expiryDate);
+        notified = calculateMonth(currentDate, expiryDate) <= MONTHS_BEFORE && !currentDate.isAfter(expiryDate);
     }
 
     public void expired(LocalDate currentDate, LocalDate expiryDate) {
@@ -45,10 +46,6 @@ public class Notification {
         } else {
             expired = false;
         }
-    }
-
-    public Integer getDifference() {
-        return monthsLeft;
     }
 
     public boolean getNotified() {
@@ -61,5 +58,9 @@ public class Notification {
 
     public boolean getException() {
         return exception;
+    }
+
+    public int getDifference() {
+        return monthsLeft;
     }
 }
