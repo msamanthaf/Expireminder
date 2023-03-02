@@ -3,6 +3,8 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class NotificationTest {
@@ -32,11 +34,20 @@ public class NotificationTest {
 
     @Test
     void testCalculateMonth() {
+        LocalDate currentDate = LocalDate.of(2023, 3, 3);
+        LocalDate date1 = LocalDate.of(2023, 12, 12);
+        notification1.calculateMonth(currentDate, date1);
+        LocalDate date2 = LocalDate.of(2024, 2, 12);
+        notification2.calculateMonth(currentDate, date2);
+        LocalDate date3 = LocalDate.of(2022, 12, 1);
+        notification3.calculateMonth(currentDate, date3);
+        LocalDate date4 = LocalDate.of(2023, 3, 31);
+        notification4.calculateMonth(currentDate, date4);
+
         assertEquals(9, notification1.getDifference());
         assertEquals(11, notification2.getDifference());
-        assertEquals(-2, notification3.getDifference());
-        assertEquals(1, notification4.getDifference());
-
+        assertEquals(-3, notification3.getDifference());
+        assertEquals(0, notification4.getDifference());
     }
 
     @Test
