@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents an account having a name and email
-public class Account {
+public class Account implements Writable {
     private String name;
     private String email;
 
@@ -16,6 +19,15 @@ public class Account {
     public void setAccount(String userName, String userEmail) {
         this.name = userName;
         this.email = userEmail;
+    }
+
+    // EFFECTS: returns this as a JSON object
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("email", email);
+        return json;
     }
 
     public String getName() {

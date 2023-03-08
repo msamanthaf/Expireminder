@@ -1,5 +1,8 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,7 +11,7 @@ import java.time.Period;
 import java.time.ZoneId;
 
 // Represents a notification for each item with an input date and local date of current time
-public class Notification {
+public class Notification implements Writable {
     private LocalDate currentTime;
     private LocalDate expiryTime;
     private static Integer MONTHS_BEFORE = 1;
@@ -51,6 +54,15 @@ public class Notification {
     // EFFECTS = returns true if expiryDate is in the past
     public void expired(LocalDate currentDate, LocalDate expiryDate) {
         expired = currentDate.isAfter(expiryDate);
+    }
+
+    // EFFECTS: returns this as a JSON object
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("expired", expired);
+        json.put("notified", notified);
+        return json;
     }
 
     public boolean getNotified() {

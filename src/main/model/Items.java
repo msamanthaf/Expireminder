@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents an item inside a category with a name, quantity, date, and notification
-public class Items {
+public class Items implements Writable {
     private String name;
     private int quantity;
     private String date;
@@ -18,6 +21,17 @@ public class Items {
 
     public Notification getNotification() {
         return notification;
+    }
+
+    // EFFECTS: returns this as a JSON object
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("quantity", quantity);
+        json.put("date", date);
+        json.put("notification", notification.toJson());
+        return json;
     }
 
     public String getName() {

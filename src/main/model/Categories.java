@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 // Represents a category having a list of names, list of index, and list of items
-public class Categories {
+public class Categories implements Writable {
     private ArrayList<String> categoryName;
     private ArrayList<String> categoryIndex;
     private ArrayList<ArrayList<Items>> categoryItems;
@@ -60,6 +64,36 @@ public class Categories {
         } else {
             goodCondition.add(i);
         }
+    }
+
+    // EFFECTS: returns this as a JSON object
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        JSONArray nameArray = new JSONArray();
+        JSONArray indexArray = new JSONArray();
+        JSONArray itemsArray = new JSONArray();
+        JSONArray itemArray = new JSONArray();
+
+        for (String s : categoryName) {
+            nameArray.put(s);
+        }
+        json.put("category name", nameArray);
+
+        for (String s : categoryIndex) {
+            indexArray.put(s);
+        }
+        json.put("category index", indexArray);
+
+        for (ArrayList<Items> items : categoryItems) {
+            //-------------------------------------
+            for (Items item : items) {
+                itemArray.put(item.toJson());
+            }
+            itemsArray.put(itemArray);
+        }
+        json.put("category items", itemsArray);
+        return json;
     }
 
     public ArrayList<String> getCategoryIndex() {

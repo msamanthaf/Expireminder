@@ -27,5 +27,6 @@ very useful for anyone who wants to avoid losing their item's worth especially t
 - Make sure that I am not going to receive any notifications to a new input item with a date that is in the past.
 - I would like to have a small status icon next to the item represented as: Green means good, 
 Yellow means expires soon (1 month), Red means expired.
-- I want to receive an email notification at the scheduled time (of 1 month).
-- I want my progress to be automatically saved when exiting the program.
+
+- As a user, I want to have an option to save my progress when exiting the program.
+- As a user, I want to have an option to load my progress from a file.
