@@ -1,5 +1,7 @@
 package ui;
 
+import persistence.JsonWriter;
+
 import java.util.Scanner;
 
 // Home page where user can see their categories and items
@@ -29,6 +31,7 @@ public class Home {
         System.out.println("~ Categories ~");
         System.out.println("Press '+' to add new category");
         categoryPage.showAllCategories();
+        System.out.println("Do you want to save your progress? 'y' : Yes, 'n' : Quit without saving");
         button();
     }
 
@@ -44,12 +47,25 @@ public class Home {
                 greetings();
                 break;
             default:
+                saveFile(button);
                 if (categoryPage.getCategory().contains(button)) {
                     categoryPage.modifyCategory(button);
                 } else {
                     button = input.nextLine();
                     button();
                 }
+                break;
+        }
+    }
+
+    private void saveFile(String button) {
+        switch (button) {
+            case "y":
+                JsonWriter.write("./data/accountData.json", currentExpireminder.getAccount());
+                JsonWriter.write("./data/categoriesData.json", categoryPage.getCategories());
+                break;
+            case "n":
+                System.exit(0);
                 break;
         }
     }

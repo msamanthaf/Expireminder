@@ -289,6 +289,10 @@ public class EditCategory {
         return category.getCategoryIndex();
     }
 
+    public Categories getCategories() {
+        return category;
+    }
+
     public int getGoodCondition() {
         return goodCondition;
     }
