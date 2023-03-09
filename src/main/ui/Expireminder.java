@@ -3,6 +3,7 @@ package ui;
 import model.Account;
 import persistence.JsonReader;
 
+import java.io.File;
 import java.util.Scanner;
 
 // Expiry date notifier application
@@ -28,18 +29,20 @@ public class Expireminder {
             JsonReader accountReader = new JsonReader("./data/accountData.json");
             currentAccount = accountReader.readAccount();
             while (currentAccount == null) {
-                System.out.println("No accounts found");
+                System.out.println("No saved accounts found");
                 signUp();
             }
-        } else {
+        } else if (inputButton.equals("n")) {
             System.out.println("Enter your name:");
             inputName = input.nextLine();
             System.out.println("Enter your email address:");
             inputEmail = input.nextLine();
             checkValid(inputName, inputEmail);
             currentAccount = new Account(inputName, inputEmail);
+        } else {
+            signUp();
         }
-        home = new Home(this);
+        home = new Home(this, inputButton);
         home.greetings();
     }
 

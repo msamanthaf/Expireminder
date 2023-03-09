@@ -13,9 +13,9 @@ public class Home {
 
     // REQUIRES: the previous Expireminder page
     // EFFECTS: runs the home window
-    public Home(Expireminder current) {
+    public Home(Expireminder current, String inputButton) {
         this.currentExpireminder = current;
-        this.categoryPage = new EditCategory(this);
+        this.categoryPage = new EditCategory(this, inputButton);
     }
 
     // EFFECTS: prints the home page

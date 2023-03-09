@@ -73,7 +73,6 @@ public class Categories implements Writable {
         JSONArray nameArray = new JSONArray();
         JSONArray indexArray = new JSONArray();
         JSONArray itemsArray = new JSONArray();
-        JSONArray itemArray = new JSONArray();
 
         for (String s : categoryName) {
             nameArray.put(s);
@@ -86,7 +85,7 @@ public class Categories implements Writable {
         json.put("category index", indexArray);
 
         for (ArrayList<Items> items : categoryItems) {
-            itemArray.clear();
+            JSONArray itemArray = new JSONArray();
             for (Items item : items) {
                 itemArray.put(item.toJson());
             }
@@ -96,16 +95,28 @@ public class Categories implements Writable {
         return json;
     }
 
-    public ArrayList<String> getCategoryIndex() {
-        return categoryIndex;
-    }
-
     public ArrayList<String> getCategoryName() {
         return categoryName;
     }
 
+    public void setCategoryName(ArrayList<String> name) {
+        categoryName = name;
+    }
+
+    public ArrayList<String> getCategoryIndex() {
+        return categoryIndex;
+    }
+
+    public void setCategoryIndex(ArrayList<String> index) {
+        categoryIndex = index;
+    }
+
     public ArrayList<ArrayList<Items>> getCategoryItems() {
         return categoryItems;
+    }
+
+    public void setCategoryItems(ArrayList<ArrayList<Items>> items) {
+        categoryItems = items;
     }
 
     public ArrayList<Items> getGoodCondition() {

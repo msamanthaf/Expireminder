@@ -60,7 +60,6 @@ public class Notification implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("expired", expired);
         json.put("notified", notified);
         return json;
     }
@@ -79,5 +78,9 @@ public class Notification implements Writable {
 
     public int getDifference() {
         return monthsLeft;
+    }
+
+    public void setNotified(Boolean notified) {
+        this.notified = notified;
     }
 }

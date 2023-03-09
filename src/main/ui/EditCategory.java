@@ -2,6 +2,7 @@ package ui;
 
 import model.Categories;
 import model.Items;
+import persistence.JsonReader;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -21,9 +22,15 @@ public class EditCategory {
 
     // REQUIRES: the previous Home page
     // EFFECTS: initialize a new area for storing categories and items
-    public EditCategory(Home home) {
+    public EditCategory(Home home, String inputButton) {
         this.home = home;
-        category = new Categories();
+        JsonReader categoriesReader = new JsonReader("./data/categoriesData.json");
+        category = categoriesReader.readCategories();
+        if (inputButton.equals("n")) {
+            category = new Categories();
+        } else {
+            category = categoriesReader.readCategories();
+        }
     }
 
     // EFFECTS: shows the number of items in the list so far

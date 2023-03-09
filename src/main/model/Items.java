@@ -57,5 +57,9 @@ public class Items implements Writable {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public void setNotification(Boolean notified) {
+        notification.setNotified(notified);
+    }
 }
 
