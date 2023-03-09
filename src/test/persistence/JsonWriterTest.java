@@ -10,14 +10,14 @@ public class JsonWriterTest {
     void testInvalidDestination() {
         Account account = new Account("name", "email");
         JsonWriter writer = new JsonWriter("./data\1llegal:fileName.json", account);
-        assertFalse(writer.write("./data\1llegal:fileName.json", account));
+        assertFalse(writer.write());
     }
 
     @Test
     void testValidDestination() {
         Account account = new Account("name", "email");
         JsonWriter writer = new JsonWriter("./data/accountData.json", account);
-        assertTrue(writer.write("./data/accountData.json", account));
+        assertTrue(writer.write());
     }
 
     @Test
