@@ -1,6 +1,7 @@
 package ui;
 
 import model.Account;
+import persistence.JsonReader;
 
 import java.util.Scanner;
 
@@ -21,12 +22,23 @@ public class Expireminder {
     // MODIFIES: this
     // EFFECTS: stores user input of name and email into Account
     public void signUp() {
-        System.out.println("Enter your name:");
-        inputName = input.nextLine();
-        System.out.println("Enter your email address:");
-        inputEmail = input.nextLine();
-        checkValid(inputName, inputEmail);
-        currentAccount = new Account(inputName, inputEmail);
+        System.out.println("Already have an account? 'y' : Load data, 'n': Make a new account");
+        String inputButton = input.nextLine();
+        if (inputButton.equals("y")) {
+            JsonReader accountReader = new JsonReader("./data/accountData.json");
+            currentAccount = accountReader.readAccount();
+            while (currentAccount == null) {
+                System.out.println("No accounts found");
+                signUp();
+            }
+        } else {
+            System.out.println("Enter your name:");
+            inputName = input.nextLine();
+            System.out.println("Enter your email address:");
+            inputEmail = input.nextLine();
+            checkValid(inputName, inputEmail);
+            currentAccount = new Account(inputName, inputEmail);
+        }
         home = new Home(this);
         home.greetings();
     }

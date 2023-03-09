@@ -86,7 +86,7 @@ public class Categories implements Writable {
         json.put("category index", indexArray);
 
         for (ArrayList<Items> items : categoryItems) {
-            //-------------------------------------
+            itemArray.clear();
             for (Items item : items) {
                 itemArray.put(item.toJson());
             }
