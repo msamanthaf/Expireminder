@@ -2,28 +2,23 @@
     "category items": [
         [
             {
-                "date": "02/29/2024",
-                "notification": {"notified": false},
-                "quantity": 1,
-                "name": "Pineapple"
-            },
-            {
                 "date": "12/12/2022",
                 "notification": {"notified": false},
                 "quantity": 1,
-                "name": "df"
+                "name": "Item 1"
+            },
+            {
+                "date": "01/01/2024",
+                "notification": {"notified": false},
+                "quantity": 2,
+                "name": "Item 2"
             }
         ],
-        [{
-            "date": "11/11/2004",
-            "notification": {"notified": false},
-            "quantity": 1,
-            "name": "Weed"
-        }]
+        []
     ],
     "category name": [
-        "Foods",
-        "Meds"
+        "Category 1",
+        "Category 2"
     ],
     "category index": [
         "1",
