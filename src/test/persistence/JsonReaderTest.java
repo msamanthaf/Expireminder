@@ -20,7 +20,7 @@ public class JsonReaderTest {
     @Test
     void testValidFile() {
         Account originalAccount = new Account("name", "email");
-        JsonWriter.write("./data/accountData.json", originalAccount);
+        new JsonWriter("./data/accountData.json", originalAccount);
         JsonReader reader = new JsonReader("./data/accountData.json");
         assertEquals("name", reader.readAccount().getName());
         assertEquals("email", reader.readAccount().getEmail());
@@ -36,7 +36,7 @@ public class JsonReaderTest {
         originalCategories.addItem(item2, 1);
         originalCategories.add("Category 2");
 
-        JsonWriter.write("./data/categoriesData.json", originalCategories);
+        new JsonWriter("./data/categoriesData.json", originalCategories);
         JsonReader reader = new JsonReader("./data/categoriesData.json");
 
         ArrayList<String> nameList = new ArrayList<>();

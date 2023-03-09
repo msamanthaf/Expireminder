@@ -62,8 +62,8 @@ public class Home {
     private void saveFile(String button) {
         switch (button) {
             case "y":
-                JsonWriter.write("./data/accountData.json", currentExpireminder.getAccount());
-                JsonWriter.write("./data/categoriesData.json", categoryPage.getCategories());
+                new JsonWriter("./data/accountData.json", currentExpireminder.getAccount());
+                new JsonWriter("./data/categoriesData.json", categoryPage.getCategories());
                 break;
             case "n":
                 System.exit(0);
