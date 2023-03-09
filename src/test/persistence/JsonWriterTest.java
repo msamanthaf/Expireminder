@@ -11,7 +11,7 @@ public class JsonWriterTest {
         Account account = new Account("name", "email");
         JsonWriter writer = new JsonWriter("./data\1llegal:fileName.json", account);
         assertFalse(writer.getWritten());
-        assertNull(writer.write("./data\1llegal:fileName.json"));
+        assertNull(JsonWriter.write("./data\1llegal:fileName.json"));
     }
 
     @Test
