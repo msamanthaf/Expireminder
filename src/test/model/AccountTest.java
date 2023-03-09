@@ -10,13 +10,13 @@ class AccountTest {
     Account account2;
 
     @BeforeEach
-    void runBefore(){
+    void runBefore() {
         account1 = new Account("Sam", "mariesamantha.f@gmail.com");
         account2 = new Account("123", "123");
     }
 
     @Test
-    void testSetAccount(){
+    void testSetAccount() {
         account1.setAccount("Samantha", "mfidelia@student.ubc.id");
         assertEquals("Samantha", account1.getName());
         assertEquals("mfidelia@student.ubc.id", account1.getEmail());

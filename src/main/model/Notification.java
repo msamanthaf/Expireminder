@@ -68,6 +68,10 @@ public class Notification implements Writable {
         return notified;
     }
 
+    public void setNotified(Boolean notified) {
+        this.notified = notified;
+    }
+
     public boolean getExpired() {
         return expired;
     }
@@ -78,9 +82,5 @@ public class Notification implements Writable {
 
     public int getDifference() {
         return monthsLeft;
-    }
-
-    public void setNotified(Boolean notified) {
-        this.notified = notified;
     }
 }

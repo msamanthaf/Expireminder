@@ -3,7 +3,6 @@ package ui;
 import model.Account;
 import persistence.JsonReader;
 
-import java.io.File;
 import java.util.Scanner;
 
 // Expiry date notifier application

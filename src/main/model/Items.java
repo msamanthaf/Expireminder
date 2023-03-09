@@ -19,10 +19,6 @@ public class Items implements Writable {
         notification = new Notification(date);
     }
 
-    public Notification getNotification() {
-        return notification;
-    }
-
     // EFFECTS: returns this as a JSON object
     @Override
     public JSONObject toJson() {
@@ -32,6 +28,14 @@ public class Items implements Writable {
         json.put("date", date);
         json.put("notification", notification.toJson());
         return json;
+    }
+
+    public Notification getNotification() {
+        return notification;
+    }
+
+    public void setNotification(Boolean notified) {
+        notification.setNotified(notified);
     }
 
     public String getName() {
@@ -57,9 +61,4 @@ public class Items implements Writable {
     public void setDate(String date) {
         this.date = date;
     }
-
-    public void setNotification(Boolean notified) {
-        notification.setNotified(notified);
-    }
 }
-

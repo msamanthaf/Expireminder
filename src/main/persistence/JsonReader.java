@@ -22,6 +22,7 @@ public class JsonReader {
         this.source = source;
     }
 
+    // EFFECTS: reads account data from file and returns it
     public Account readAccount() {
         try {
             String jsonData = readFile();
@@ -32,6 +33,7 @@ public class JsonReader {
         }
     }
 
+    // EFFECTS: reads categories data from file and returns it
     public Categories readCategories() {
         try {
             String jsonData = readFile();
@@ -51,6 +53,8 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
+    // MODIFIES: account
+    // EFFECTS: parses account data from JSON object and returns it
     private Account parseAccount(JSONObject obj) {
         String name = obj.getString("name");
         String email = obj.getString("email");
@@ -58,6 +62,8 @@ public class JsonReader {
         return account;
     }
 
+    // MODIFIES: categories
+    // EFFECTS: parses categories data from JSON object and returns it
     private Categories parseCategories(JSONObject obj) {
         Categories categories = new Categories();
         JSONArray nameArray = obj.getJSONArray("category name");
@@ -65,23 +71,20 @@ public class JsonReader {
         JSONArray itemsArray = obj.getJSONArray("category items");
         ArrayList<String> names = new ArrayList<>();
         ArrayList<String> index = new ArrayList<>();
-
         for (Object s : nameArray) {
             names.add((String) s);
         }
         categories.setCategoryName(names);
-
         for (Object s : indexArray) {
             index.add((String) s);
         }
         categories.setCategoryIndex(index);
-
         parseItems(categories, itemsArray);
-
         return categories;
-
     }
 
+    // MODIFIES: items, categories
+    // EFFECTS: parses the ArrayList of Items from JSON Array
     private void parseItems(Categories categories, JSONArray itemsArray) {
         ArrayList<ArrayList<Items>> items = new ArrayList<>();
         for (Object i : itemsArray) {

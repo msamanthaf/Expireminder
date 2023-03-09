@@ -58,6 +58,7 @@ public class Home {
         }
     }
 
+    // EFFECTS: writes data into JSON file or exit based on user input
     private void saveFile(String button) {
         switch (button) {
             case "y":
