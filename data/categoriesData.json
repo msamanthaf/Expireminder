@@ -21,12 +21,15 @@
             "name": "Item 3"
         }]
     ],
+    "exp": 1,
     "category name": [
         "Category 1",
         "Category 2"
     ],
+    "good": 1,
     "category index": [
         "1",
         "2"
-    ]
+    ],
+    "soon": 1
 }

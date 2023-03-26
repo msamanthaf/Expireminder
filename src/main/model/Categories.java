@@ -15,6 +15,36 @@ public class Categories implements Writable {
     private ArrayList<Items> expiringSoon = new ArrayList<>();
     private ArrayList<Items> expired = new ArrayList<>();
 
+    private int goodItems;
+
+    public int getGoodItems() {
+        return goodItems;
+    }
+
+    public void setGoodItems(int goodItems) {
+        this.goodItems = goodItems;
+    }
+
+    private int expiringItems;
+
+    public int getExpiringItems() {
+        return expiringItems;
+    }
+
+    public void setExpiringItems(int expiringItems) {
+        this.expiringItems = expiringItems;
+    }
+
+    private int expiredItems;
+
+    public int getExpiredItems() {
+        return expiredItems;
+    }
+
+    public void setExpiredItems(int expiredItems) {
+        this.expiredItems = expiredItems;
+    }
+
     // EFFECTS: creates new empty list of names, index, and items
     public Categories() {
         categoryName = new ArrayList<>();
@@ -92,6 +122,9 @@ public class Categories implements Writable {
             itemsArray.put(itemArray);
         }
         json.put("category items", itemsArray);
+        json.put("good", getGoodCondition().size());
+        json.put("soon", getExpiringSoon().size());
+        json.put("exp", getExpired().size());
         return json;
     }
 
