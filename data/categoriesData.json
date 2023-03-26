@@ -2,7 +2,7 @@
     "category items": [
         [
             {
-                "date": "12/12/2022",
+                "date": "12/12/2012",
                 "notification": {"notified": false},
                 "quantity": 1,
                 "name": "Item 1"
@@ -14,7 +14,12 @@
                 "name": "Item 2"
             }
         ],
-        []
+        [{
+            "date": "04/10/2023",
+            "notification": {"notified": true},
+            "quantity": 1,
+            "name": "Item 3"
+        }]
     ],
     "category name": [
         "Category 1",

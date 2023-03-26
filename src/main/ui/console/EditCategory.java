@@ -1,4 +1,4 @@
-package ui;
+package ui.console;
 
 import model.Categories;
 import model.Items;

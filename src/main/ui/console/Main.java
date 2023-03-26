@@ -1,4 +1,4 @@
-package ui;
+package ui.console;
 
 public class Main {
     // EFFECTS: runs the application of Expireminder
