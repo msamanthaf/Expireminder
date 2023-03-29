@@ -1,6 +1,7 @@
 package ui.gui;
 
 import model.Account;
+import model.Categories;
 import persistence.JsonReader;
 
 import javax.swing.*;
@@ -71,12 +72,12 @@ public class Start extends JFrame implements ActionListener, ScreenAdjustment {
                 invalid = new JLabel("No saved accounts found");
             }
             startPage.dispose();
-            new Homepage(currentAccount, "y");
+            new Homepage(currentAccount, new Categories(), "y");
         }
 
         if (e.getSource() == noButton) {
             startPage.dispose();
-            new Setup();
+            new Setup("n", currentAccount, new Categories());
         }
     }
 }

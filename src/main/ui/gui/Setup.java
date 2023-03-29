@@ -1,6 +1,7 @@
 package ui.gui;
 
 import model.Account;
+import model.Categories;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,11 +19,18 @@ public class Setup extends JFrame implements ActionListener, ScreenAdjustment {
     private String inputEmail;
     private JLabel invalidName = new JLabel();
     private JLabel invalidEmail = new JLabel();
+    private Categories currentCategories;
     private Account currentAccount;
+    private String inputCase;
+    private Account account;
+    private Categories category;
 
     // REQUIRES: the previous Expireminder page
     // EFFECTS: runs the home window
-    public Setup() {
+    public Setup(String inputCase, Account account, Categories category) {
+        this.account = account;
+        this.category = category;
+        this.inputCase = inputCase;
         setupPage = new JFrame();
         panel = new JPanel();
         Container pane = this.getContentPane();
@@ -32,12 +40,10 @@ public class Setup extends JFrame implements ActionListener, ScreenAdjustment {
     }
 
     private void printComponents(JPanel panel, Container pane) {
-        // Add the components with vertical spacing
         JLabel enterName = new JLabel("<html> Enter your name:<br>   ");
         enterName.setFont(new Font("Adobe Clean ExtraBold", Font.BOLD, 15));
         textAdjustments(enterName);
         pane.add(enterName);
-
         nameBox.setPreferredSize(new Dimension(200, 20));
         nameBox.addActionListener(this);
         pane.add(nameBox);
@@ -67,9 +73,16 @@ public class Setup extends JFrame implements ActionListener, ScreenAdjustment {
             inputEmail = emailBox.getText();
             checkValid(inputName, inputEmail);
             if (!inputName.isEmpty() && !inputEmail.isEmpty()) {
-                currentAccount = new Account(inputName, inputEmail);
+                if (inputCase == "n") {
+                    currentAccount = new Account(inputName, inputEmail);
+                    currentCategories = new Categories();
+                } else {
+                    account.setAccount(inputName, inputEmail);
+                    currentAccount = account;
+                    currentCategories = category;
+                }
                 setupPage.dispose();
-                new Homepage(currentAccount, "n");
+                new Homepage(currentAccount, currentCategories, inputCase);
             }
         }
     }
