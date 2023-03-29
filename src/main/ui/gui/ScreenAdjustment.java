@@ -29,7 +29,7 @@ public interface ScreenAdjustment {
     }
 
     default void popUp(JPanel panel, JFrame load) {
-        load.setSize(360, 100);
+        load.setSize(360, 120);
         load.setResizable(false);
         load.setTitle("EXPIREMINDER");
         load.setBackground(Color.DARK_GRAY);

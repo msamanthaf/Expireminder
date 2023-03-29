@@ -19,7 +19,6 @@ public class EditCategory extends JFrame implements ActionListener, ScreenAdjust
     private JButton deleteButton;
     private JButton backButton;
     private Account currentAccount;
-    private String newName;
     private int index;
 
     public EditCategory(int index, Categories currentCategories, Account currentAccount, JFrame home) {
@@ -44,8 +43,8 @@ public class EditCategory extends JFrame implements ActionListener, ScreenAdjust
         paneButtons.setBackground(Color.DARK_GRAY);
         printButtons(paneButtons);
         panel.add(renamePane);
-        panel.add(paneButtons);
         panel.add(invalidName);
+        panel.add(paneButtons);
 
         popUp(panel, editCategoryPage);
     }
@@ -58,7 +57,6 @@ public class EditCategory extends JFrame implements ActionListener, ScreenAdjust
 
         nameBox = new JTextField(1);
         nameBox.setPreferredSize(new Dimension(200, 20));
-        newName = nameBox.getText();
         pane.add(nameBox);
 
         renameButton = new JButton("Ok");
@@ -79,11 +77,14 @@ public class EditCategory extends JFrame implements ActionListener, ScreenAdjust
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == renameButton) {
+            String newName = nameBox.getText();
             checkValid(newName);
-            currentCategories.rename(index, newName);
-            new Homepage(currentAccount, currentCategories, "else");
-            editCategoryPage.dispose();
-            home.dispose();
+            if (!newName.isEmpty() && !currentCategories.getCategoryName().contains(newName)) {
+                currentCategories.rename(index, newName);
+                new Homepage(currentAccount, currentCategories, "else");
+                editCategoryPage.dispose();
+                home.dispose();
+            }
         }
         if (e.getSource() == deleteButton) {
             currentCategories.delete(index - 1);
@@ -99,15 +100,15 @@ public class EditCategory extends JFrame implements ActionListener, ScreenAdjust
     private void checkValid(String name) {
         if (name.isEmpty() && currentCategories.getCategoryName().contains(name)) {
             invalidName.setText("A category name cannot be blank");
-            invalidName.setFont(new Font("Adobe Clean ExtraBold", Font.BOLD, 10));
+            invalidName.setFont(new Font("Adobe Clean ExtraBold", Font.BOLD, 8));
             invalidName.setForeground(Color.RED);
         } else if (name.isEmpty()) {
             invalidName.setText("A category name cannot be blank");
-            invalidName.setFont(new Font("Adobe Clean ExtraBold", Font.BOLD, 10));
+            invalidName.setFont(new Font("Adobe Clean ExtraBold", Font.BOLD, 8));
             invalidName.setForeground(Color.RED);
         } else if (currentCategories.getCategoryName().contains(name)) {
             invalidName.setText("Category name cannot be the same as existing ones");
-            invalidName.setFont(new Font("Adobe Clean ExtraBold", Font.BOLD, 10));
+            invalidName.setFont(new Font("Adobe Clean ExtraBold", Font.BOLD, 8));
             invalidName.setForeground(Color.RED);
         }
     }
