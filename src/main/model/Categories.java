@@ -122,6 +122,11 @@ public class Categories implements Writable {
             itemsArray.put(itemArray);
         }
         json.put("category items", itemsArray);
+        for (ArrayList<Items> items : categoryItems) {
+            for (Items item : items) {
+                addStatus(item);
+            }
+        }
         json.put("good", getGoodCondition().size());
         json.put("soon", getExpiringSoon().size());
         json.put("exp", getExpired().size());

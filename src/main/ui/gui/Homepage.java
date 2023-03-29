@@ -4,6 +4,7 @@ import model.Account;
 import model.Categories;
 import model.Items;
 import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,15 +18,16 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
     private JButton editProfileButton;
     private JButton addCategoryButton;
     private JButton editCategoryButton;
+    private JButton saveButton;
     private JLabel itemStatus;
     private JLabel greetings;
+    private JPanel saveData;
     private Container pane;
     private Account currentAccount;
     private Categories currentCategories;
 
     public Homepage(Account currentAccount, Categories currentCategories, String inputButton) {
         this.currentAccount = currentAccount;
-        this.currentCategories = currentCategories;
         if (inputButton.equals("y")) {
             JsonReader reader = new JsonReader("./data/categoriesData.json");
             this.currentCategories = reader.readCategories();
@@ -65,11 +67,25 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
 
         showAllCategories();
 
-        Container saveData = new JPanel(new GridLayout(1, 2));
+        saveFunction();
+
+        pane.add(saveData);
         panel.add(pane);
         panel.setSize(360, 640);
         JScrollPane scrollPane = new JScrollPane(panel);
         scrollBar(scrollPane, home);
+    }
+
+    private void saveFunction() {
+        saveData = new JPanel(new GridLayout(2, 1));
+        saveData.setBackground(Color.DARK_GRAY);
+        JLabel save = new JLabel("Save data before exit?");
+        textAdjustments(save);
+        saveData.add(save);
+
+        saveButton = new JButton("Yes, save my progress");
+        saveButton.addActionListener(this);
+        saveData.add(saveButton);
     }
 
     private void showAllCategories() {
@@ -119,6 +135,10 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
         if (e.getSource() == addCategoryButton) {
             home.dispose();
             new AddCategory(currentCategories, currentAccount);
+        }
+        if (e.getSource() == saveButton) {
+            new JsonWriter("./data/accountData.json", currentAccount);
+            new JsonWriter("./data/categoriesData.json", currentCategories);
         }
     }
 }
