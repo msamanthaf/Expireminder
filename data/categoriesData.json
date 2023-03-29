@@ -19,17 +19,30 @@
             "notification": {"notified": true},
             "quantity": 1,
             "name": "Item 3"
-        }]
+        }],
+        [
+            {
+                "date": "03/30/2023",
+                "notification": {"notified": true},
+                "quantity": 5,
+                "name": "Item 4"
+            },
+            {
+                "date": "1/1/2002",
+                "notification": {"notified": false},
+                "quantity": 1,
+                "name": "Item 5"
+            }
+        ]
     ],
     "category name": [
         "Category 1",
-        "Category 2"
+        "Category 2",
+        "Category 3"
     ],
     "category index": [
         "1",
-        "2"
-    ],
-    "exp": 1,
-    "good": 1,
-    "soon": 1
+        "2",
+        "3"
+    ]
 }

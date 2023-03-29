@@ -71,9 +71,6 @@ public class JsonReader {
         JSONArray itemsArray = obj.getJSONArray("category items");
         ArrayList<String> names = new ArrayList<>();
         ArrayList<String> index = new ArrayList<>();
-        categories.setGoodItems(obj.getInt("good"));
-        categories.setExpiringItems(obj.getInt("soon"));
-        categories.setExpiredItems(obj.getInt("exp"));
         for (Object s : nameArray) {
             names.add((String) s);
         }

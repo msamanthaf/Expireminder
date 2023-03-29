@@ -3,6 +3,7 @@ package ui.gui;
 import model.Account;
 import model.Categories;
 import model.Items;
+import model.Notification;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -18,6 +19,7 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
     private JButton editProfileButton;
     private JButton addCategoryButton;
     private JButton editCategoryButton;
+    private JButton addItemButton;
     private JButton saveButton;
     private JLabel itemStatus;
     private JLabel greetings;
@@ -25,6 +27,9 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
     private Container pane;
     private Account currentAccount;
     private Categories currentCategories;
+    private ArrayList<Items> goodCondition = new ArrayList<>();
+    private ArrayList<Items> expiringSoon = new ArrayList<>();
+    private ArrayList<Items> expired = new ArrayList<>();
 
     public Homepage(Account currentAccount, Categories currentCategories, String inputButton) {
         this.currentAccount = currentAccount;
@@ -33,6 +38,8 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
             this.currentCategories = reader.readCategories();
         } else if (inputButton.equals("n")) {
             this.currentCategories = new Categories();
+        } else {
+            this.currentCategories = currentCategories;
         }
 
         home = new JFrame();
@@ -55,9 +62,9 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
         pane.add(editProfileButton);
 
         itemStatus = new JLabel();
-        itemStatus.setText("<html> You have: <br>" + currentCategories.getGoodItems() + " items in good condition"
-                + "<html><br>" + currentCategories.getExpiringItems() + " items expiring soon" + "<html><br>"
-                + currentCategories.getExpiredItems() + " items expired");
+        checkStatus();
+        itemStatus.setText("<html> You have: <br>" + goodCondition.size() + " items in good condition" + "<html><br>"
+                + expiringSoon.size() + " items expiring soon" + "<html><br>" + expired.size() + " items expired");
         textAdjustments(itemStatus);
         pane.add(itemStatus);
 
@@ -76,6 +83,27 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
         scrollBar(scrollPane, home);
     }
 
+    private void checkStatus() {
+        for (ArrayList<Items> items : currentCategories.getCategoryItems()) {
+            for (Items item : items) {
+                addStatus(item);
+            }
+        }
+    }
+
+    // MODIFIES: expired, expiringSoon, goodCondition
+    // EFFECTS: creates new notification for this item and sort it into a group
+    public void addStatus(Items i) {
+        Notification dummy = new Notification(i.getDate());
+        if (dummy.getExpired()) {
+            expired.add(i);
+        } else if (dummy.getNotified()) {
+            expiringSoon.add(i);
+        } else {
+            goodCondition.add(i);
+        }
+    }
+
     private void saveFunction() {
         saveData = new JPanel(new GridLayout(2, 1));
         saveData.setBackground(Color.DARK_GRAY);
@@ -90,6 +118,7 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
 
     private void showAllCategories() {
         for (int i = 0; i < currentCategories.getCategoryName().size(); i++) {
+            int itemIndex = i;
             Container allCategories = new JPanel(new GridLayout(2, 1));
             header(i, allCategories);
             ArrayList<Items> listOfItems = currentCategories.getCategoryItems().get(i);
@@ -97,7 +126,11 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
             displayItems.setLayout(new GridLayout(listOfItems.size(), 1));
             for (Items item : listOfItems) {
                 int indexPosition = listOfItems.indexOf(item);
-                JLabel itemNumber = new JLabel(String.valueOf(indexPosition + 1) + ".");
+                JButton itemNumber = new JButton(String.valueOf(indexPosition + 1) + ".");
+                itemNumber.addActionListener(e -> {
+                    new AddItem(indexPosition + 1, currentCategories, currentAccount, home,
+                            "edit", itemIndex);
+                });
                 JLabel itemName = new JLabel(item.getName());
                 JLabel itemDescription = new JLabel("x" + item.getQuantity() + " ~ "
                         + item.getDate());
@@ -119,7 +152,10 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
         editCategoryButton.addActionListener(e -> {
             new EditCategory(i + 1, currentCategories, currentAccount, home);
         });
-        JButton addItemButton = new JButton("Add new item");
+        addItemButton = new JButton("Add new item");
+        addItemButton.addActionListener(e -> {
+            new AddItem(i + 1, currentCategories, currentAccount, home, "ignore", i);
+        });
         header.add(categoryLabel);
         header.add(editCategoryButton);
         header.add(addItemButton);

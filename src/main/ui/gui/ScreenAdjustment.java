@@ -28,8 +28,8 @@ public interface ScreenAdjustment {
         load.setVisible(true);
     }
 
-    default void popUp(JPanel panel, JFrame load) {
-        load.setSize(360, 120);
+    default void popUp(JPanel panel, JFrame load, int width, int height) {
+        load.setSize(width, height);
         load.setResizable(false);
         load.setTitle("EXPIREMINDER");
         load.setBackground(Color.DARK_GRAY);

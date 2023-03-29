@@ -46,7 +46,7 @@ public class EditCategory extends JFrame implements ActionListener, ScreenAdjust
         panel.add(invalidName);
         panel.add(paneButtons);
 
-        popUp(panel, editCategoryPage);
+        popUp(panel, editCategoryPage, 360, 120);
     }
 
     private void printRename(Container pane) {
