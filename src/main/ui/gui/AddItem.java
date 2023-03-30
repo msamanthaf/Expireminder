@@ -27,6 +27,8 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
     private JLabel invalidName = new JLabel();
     private JLabel invalidDate = new JLabel();
     private JButton okButton;
+    private JButton renameButton;
+    private JButton deleteButton;
     private SpinnerNumberModel spinnerModel;
 
     public AddItem(int index, Categories currentCategories, Account currentAccount, JFrame home,
@@ -92,11 +94,11 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
         quantity.setModel(spinnerModel);
         dateBox.setText(selected.getDate());
 
-        JButton renameButton = new JButton("Change");
+        renameButton = new JButton("Change");
         renameButton.addActionListener(this);
         pane.add(renameButton);
 
-        JButton deleteButton = new JButton("Delete item");
+        deleteButton = new JButton("Delete item");
         deleteButton.addActionListener(this);
         pane.add(deleteButton);
     }
@@ -116,17 +118,50 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == okButton) {
-            String itemName = nameBox.getText();
-            int itemQuantity = (int) quantity.getValue();
-            String itemDate = dateBox.getText();
-            checkValid(itemName, itemDate);
-            if (!itemName.isEmpty() && !itemDate.isEmpty() && isValidDate(itemDate)) {
-                Items item = new Items(itemName, itemQuantity, itemDate);
-                currentCategories.addItem(item, index);
-                new Homepage(currentAccount, currentCategories, "else");
-                addItemPage.dispose();
-                home.dispose();
-            }
+            addNew();
+        }
+
+        if (e.getSource() == renameButton) {
+            modifyItem();
+        }
+
+        if (e.getSource() == deleteButton) {
+            ArrayList<Items> arrayOfItems = currentCategories.getCategoryItems().get(categoryIndex);
+            arrayOfItems.remove(index - 1);
+            new Homepage(currentAccount, currentCategories, "else");
+            addItemPage.dispose();
+            home.dispose();
+        }
+    }
+
+    private void addNew() {
+        String itemName = nameBox.getText();
+        int itemQuantity = (int) quantity.getValue();
+        String itemDate = dateBox.getText();
+        checkValid(itemName, itemDate);
+        if (!itemName.isEmpty() && !itemDate.isEmpty() && isValidDate(itemDate)) {
+            Items item = new Items(itemName, itemQuantity, itemDate);
+            currentCategories.addItem(item, index);
+            new Homepage(currentAccount, currentCategories, "else");
+            addItemPage.dispose();
+            home.dispose();
+        }
+    }
+
+    private void modifyItem() {
+        String itemName = nameBox.getText();
+        int itemQuantity = (int) quantity.getValue();
+        String itemDate = dateBox.getText();
+        checkValid(itemName, itemDate);
+        if (!itemName.isEmpty() && !itemDate.isEmpty() && isValidDate(itemDate)) {
+            ArrayList<Items> arrayOfItems = currentCategories.getCategoryItems().get(categoryIndex);
+            Items selected = arrayOfItems.get(index - 1);
+            selected.setName(itemName);
+            selected.setQuantity(itemQuantity);
+            selected.setDate(itemDate);
+            new Homepage(currentAccount, currentCategories, "else");
+            addItemPage.dispose();
+            home.dispose();
         }
     }
 
