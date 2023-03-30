@@ -19,7 +19,7 @@ public class Start extends JFrame implements ActionListener, ScreenAdjustment {
     private JLabel invalid;
     private JButton yesButton;
     private JButton noButton;
-    JLabel space = new JLabel("                         ");
+    JLabel space = new JLabel("                              ");
     private Account currentAccount;
 
     // EFFECTS: runs the first window

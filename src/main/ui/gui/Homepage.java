@@ -122,8 +122,7 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
             Container allCategories = new JPanel(new GridLayout(2, 1));
             header(i, allCategories);
             ArrayList<Items> listOfItems = currentCategories.getCategoryItems().get(i);
-            Container displayItems = new JPanel();
-            displayItems.setLayout(new GridLayout(listOfItems.size(), 1));
+            JPanel displayItems = new JPanel(new GridLayout(listOfItems.size(), 1));
             for (Items item : listOfItems) {
                 int indexPosition = listOfItems.indexOf(item);
                 JButton itemNumber = new JButton(String.valueOf(indexPosition + 1) + ".");
