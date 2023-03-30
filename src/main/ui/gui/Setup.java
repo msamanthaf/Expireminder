@@ -39,6 +39,7 @@ public class Setup extends JFrame implements ActionListener, ScreenAdjustment {
         printComponents(panel, pane);
     }
 
+    // MODIFIES: this
     // EFFECTS: Obtain user input for new account
     private void printComponents(JPanel panel, Container pane) {
         JLabel enterName = new JLabel("<html> Enter your name:<br>   ");
@@ -89,6 +90,7 @@ public class Setup extends JFrame implements ActionListener, ScreenAdjustment {
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: Displays a message when input name and email is invalid
     private void checkValid(String inputName, String inputEmail) {
         if (inputName.isEmpty() && inputEmail.isEmpty()) {

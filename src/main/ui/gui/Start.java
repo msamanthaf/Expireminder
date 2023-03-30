@@ -22,6 +22,7 @@ public class Start extends JFrame implements ActionListener, ScreenAdjustment {
     JLabel space = new JLabel("                              ");
     private Account currentAccount;
 
+    // MODIFIES: this
     // EFFECTS: runs the first window
     public Start() {
         printWelcome();
@@ -40,6 +41,7 @@ public class Start extends JFrame implements ActionListener, ScreenAdjustment {
         screenAdjustment(screen, startPage);
     }
 
+    // MODIFIES: this
     // EFFECTS: Displays the welcome page
     private void printWelcome() {
         logo = new ImageIcon("data/Expireminder.png");
@@ -54,6 +56,7 @@ public class Start extends JFrame implements ActionListener, ScreenAdjustment {
         textAdjustments(question);
     }
 
+    // MODIFIES: this
     // EFFECTS: Display options as buttons to load saved data
     private void displayButton() {
         yesButton = new JButton("<html> Yes, load data");
