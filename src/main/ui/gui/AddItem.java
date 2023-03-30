@@ -57,6 +57,7 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
         popUp(panel, addItemPage, 320, 340);
     }
 
+    // MODIFIES: this
     // EFFECTS: Displays window for user input
     private void printComponents(Container pane, String input) {
         JLabel enterName = new JLabel("Item name: ");
@@ -89,6 +90,7 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: Displays window when user wants to edit items
     private void editItem(Container pane) {
         ArrayList<Items> arrayOfItems = currentCategories.getCategoryItems().get(categoryIndex);
@@ -108,6 +110,7 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
         pane.add(deleteButton);
     }
 
+    // MODIFIES: this
     // EFFECTS: Allows user to input expiry date
     private void enterDate(Container pane) {
         JLabel enterDate = new JLabel("Expiry Date: ");
@@ -190,6 +193,7 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
         return true;
     }
 
+    // MODIFIES: this
     // EFFECTS: checks whether input name and date is valid
     private void checkValid(String name, String date) {
         if (name.isEmpty()) {

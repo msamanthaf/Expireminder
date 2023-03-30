@@ -54,6 +54,7 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
         printComponents(panel, pane);
     }
 
+    // MODIFIES: this
     // EFFECTS: Displays the entire home page
     private void printComponents(JPanel panel, Container pane) {
         greetings = new JLabel("Hello " + currentAccount.getName() + "!");
@@ -109,6 +110,7 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: writes data into JSON file or exit based on user input
     private void saveFunction() {
         saveData = new JPanel(new GridLayout(2, 1));
@@ -122,6 +124,7 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
         saveData.add(saveButton);
     }
 
+    // MODIFIES: this
     // EFFECTS: Displays the categories and items panel
     private void showAllCategories() {
         for (int i = 0; i < currentCategories.getCategoryName().size(); i++) {
@@ -149,6 +152,7 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: Displays the label of each category and the edit category button
     private void header(int i, Container allCategories) {
         JPanel header = new JPanel(new GridLayout(1, 3));

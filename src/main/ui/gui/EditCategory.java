@@ -52,6 +52,7 @@ public class EditCategory extends JFrame implements ActionListener, ScreenAdjust
         popUp(panel, editCategoryPage, 360, 120);
     }
 
+    // MODIFIES: this
     // EFFECTS: Allows user to rename category name
     private void printRename(Container pane) {
         JLabel enterName = new JLabel("New category name:");
@@ -103,6 +104,7 @@ public class EditCategory extends JFrame implements ActionListener, ScreenAdjust
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: Displays a message when input name is invalid
     private void checkValid(String name) {
         if (name.isEmpty() && currentCategories.getCategoryName().contains(name)) {

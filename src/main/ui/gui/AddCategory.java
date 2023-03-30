@@ -50,6 +50,7 @@ public class AddCategory extends JFrame implements ActionListener, ScreenAdjustm
         screenAdjustment(panel, addCategoryPage);
     }
 
+    // MODIFIES: this
     // EFFECTS: Runs new JFrame windows based on button pressed
     @Override
     public void actionPerformed(ActionEvent e) {
