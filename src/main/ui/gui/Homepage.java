@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+// Home page where user can see their categories and items
 public class Homepage extends JFrame implements ActionListener, ScreenAdjustment {
     private JFrame home;
     private JPanel panel;
@@ -31,6 +32,8 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
     private ArrayList<Items> expiringSoon = new ArrayList<>();
     private ArrayList<Items> expired = new ArrayList<>();
 
+    // REQUIRES: non-null Account and Categories
+    // EFFECTS: runs the home window
     public Homepage(Account currentAccount, Categories currentCategories, String inputButton) {
         this.currentAccount = currentAccount;
         if (inputButton.equals("y")) {
@@ -51,6 +54,7 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
         printComponents(panel, pane);
     }
 
+    // EFFECTS: Displays the entire home page
     private void printComponents(JPanel panel, Container pane) {
         greetings = new JLabel("Hello " + currentAccount.getName() + "!");
         greetings.setFont(new Font("Adobe Clean ExtraBold", Font.BOLD, 20));
@@ -83,6 +87,7 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
         scrollBar(scrollPane, home);
     }
 
+    // EFFECTS: Classifies all items into their status to display them at the home page
     private void checkStatus() {
         for (ArrayList<Items> items : currentCategories.getCategoryItems()) {
             for (Items item : items) {
@@ -104,6 +109,7 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
         }
     }
 
+    // EFFECTS: writes data into JSON file or exit based on user input
     private void saveFunction() {
         saveData = new JPanel(new GridLayout(2, 1));
         saveData.setBackground(Color.DARK_GRAY);
@@ -116,6 +122,7 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
         saveData.add(saveButton);
     }
 
+    // EFFECTS: Displays the categories and items panel
     private void showAllCategories() {
         for (int i = 0; i < currentCategories.getCategoryName().size(); i++) {
             int itemIndex = i;
@@ -142,6 +149,7 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
         }
     }
 
+    // EFFECTS: Displays the label of each category and the edit category button
     private void header(int i, Container allCategories) {
         JPanel header = new JPanel(new GridLayout(1, 3));
         JLabel categoryLabel = new JLabel();
@@ -161,6 +169,7 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
         allCategories.add(header);
     }
 
+    // EFFECTS: goes to new JFrame page based on user input
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == editProfileButton) {

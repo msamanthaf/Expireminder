@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-// Expiry date notifier application
+// Expiry date notifier application start page
 public class Start extends JFrame implements ActionListener, ScreenAdjustment {
     private JFrame startPage;
     private ImageIcon logo;
@@ -40,6 +40,7 @@ public class Start extends JFrame implements ActionListener, ScreenAdjustment {
         screenAdjustment(screen, startPage);
     }
 
+    // EFFECTS: Displays the welcome page
     private void printWelcome() {
         logo = new ImageIcon("data/Expireminder.png");
         splashLogo = logo.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT);
@@ -53,6 +54,7 @@ public class Start extends JFrame implements ActionListener, ScreenAdjustment {
         textAdjustments(question);
     }
 
+    // EFFECTS: Display options as buttons to load saved data
     private void displayButton() {
         yesButton = new JButton("<html> Yes, load data");
         yesButton.setBounds(250, 320, 80, 50);
@@ -63,6 +65,7 @@ public class Start extends JFrame implements ActionListener, ScreenAdjustment {
         noButton.addActionListener(this);
     }
 
+    // EFFECTS: Goes to next JFrame page when button is pressed
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == yesButton) {

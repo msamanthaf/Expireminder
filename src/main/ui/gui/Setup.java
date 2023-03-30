@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-// Home page where user can see their categories and items
+// Setup page where user first make their accounts
 public class Setup extends JFrame implements ActionListener, ScreenAdjustment {
     private JFrame setupPage;
     private JPanel panel;
@@ -25,8 +25,8 @@ public class Setup extends JFrame implements ActionListener, ScreenAdjustment {
     private Account account;
     private Categories category;
 
-    // REQUIRES: the previous Expireminder page
-    // EFFECTS: runs the home window
+    // REQUIRES: the previous start page
+    // EFFECTS: creates new page to set up an account
     public Setup(String inputCase, Account account, Categories category) {
         this.account = account;
         this.category = category;
@@ -39,6 +39,7 @@ public class Setup extends JFrame implements ActionListener, ScreenAdjustment {
         printComponents(panel, pane);
     }
 
+    // EFFECTS: Obtain user input for new account
     private void printComponents(JPanel panel, Container pane) {
         JLabel enterName = new JLabel("<html> Enter your name:<br>   ");
         enterName.setFont(new Font("Adobe Clean ExtraBold", Font.BOLD, 15));
@@ -66,6 +67,7 @@ public class Setup extends JFrame implements ActionListener, ScreenAdjustment {
         screenAdjustment(panel, setupPage);
     }
 
+    // EFFECTS: Creates new account and moves to next home JFrame when button is pressed
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == nextButton) {
@@ -87,6 +89,7 @@ public class Setup extends JFrame implements ActionListener, ScreenAdjustment {
         }
     }
 
+    // EFFECTS: Displays a message when input name and email is invalid
     private void checkValid(String inputName, String inputEmail) {
         if (inputName.isEmpty() && inputEmail.isEmpty()) {
             invalidName.setText("Please enter a valid name");

@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// User interaction to edit a category
 public class EditCategory extends JFrame implements ActionListener, ScreenAdjustment {
     private Categories currentCategories;
     private JFrame editCategoryPage;
@@ -21,6 +22,8 @@ public class EditCategory extends JFrame implements ActionListener, ScreenAdjust
     private Account currentAccount;
     private int index;
 
+    // REQUIRES: previous home page, non-null Account and Categories, valid category index
+    // EFFECTS: initialize a new area for storing categories and items
     public EditCategory(int index, Categories currentCategories, Account currentAccount, JFrame home) {
         this.currentAccount = currentAccount;
         this.currentCategories = currentCategories;
@@ -49,6 +52,7 @@ public class EditCategory extends JFrame implements ActionListener, ScreenAdjust
         popUp(panel, editCategoryPage, 360, 120);
     }
 
+    // EFFECTS: Allows user to rename category name
     private void printRename(Container pane) {
         JLabel enterName = new JLabel("New category name:");
         enterName.setFont(new Font("Adobe Clean ExtraBold", Font.BOLD, 10));
@@ -64,6 +68,7 @@ public class EditCategory extends JFrame implements ActionListener, ScreenAdjust
         pane.add(renameButton);
     }
 
+    // EFFECTS: Runs tasks based on button pressed
     private void printButtons(Container pane) {
         deleteButton = new JButton("Delete Category");
         deleteButton.addActionListener(this);
@@ -74,6 +79,7 @@ public class EditCategory extends JFrame implements ActionListener, ScreenAdjust
         pane.add(backButton);
     }
 
+    // EFFECTS: Runs new JFrame windows based on button pressed
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == renameButton) {
@@ -97,6 +103,7 @@ public class EditCategory extends JFrame implements ActionListener, ScreenAdjust
         }
     }
 
+    // EFFECTS: Displays a message when input name is invalid
     private void checkValid(String name) {
         if (name.isEmpty() && currentCategories.getCategoryName().contains(name)) {
             invalidName.setText("A category name cannot be blank");

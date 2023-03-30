@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Pop up window that allows user interaction to add new categories
 public class AddCategory extends JFrame implements ActionListener, ScreenAdjustment {
     private Categories currentCategories;
     private JFrame addCategoryPage;
@@ -17,6 +18,8 @@ public class AddCategory extends JFrame implements ActionListener, ScreenAdjustm
     private JButton okButton;
     private Account currentAccount;
 
+    // REQUIRES: non-null Account and Categories
+    // EFFECTS: initialize a new area to add new categories
     public AddCategory(Categories currentCategories, Account currentAccount) {
         this.currentAccount = currentAccount;
         this.currentCategories = currentCategories;
@@ -28,6 +31,7 @@ public class AddCategory extends JFrame implements ActionListener, ScreenAdjustm
         printComponents(panel, pane);
     }
 
+    // EFFECTS: Displays window for user input
     private void printComponents(JPanel panel, Container pane) {
         JLabel categoryName = new JLabel("<html> Category name:<br>   ");
         categoryName.setFont(new Font("Adobe Clean ExtraBold", Font.BOLD, 15));
@@ -46,6 +50,7 @@ public class AddCategory extends JFrame implements ActionListener, ScreenAdjustm
         screenAdjustment(panel, addCategoryPage);
     }
 
+    // EFFECTS: Runs new JFrame windows based on button pressed
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == okButton) {
@@ -59,6 +64,7 @@ public class AddCategory extends JFrame implements ActionListener, ScreenAdjustm
         }
     }
 
+    // EFFECTS: checks whether input name is valid
     private void checkValid(String name) {
         if (name.isEmpty() && currentCategories.getCategoryName().contains(name)) {
             invalidName.setText("A category name cannot be blank");

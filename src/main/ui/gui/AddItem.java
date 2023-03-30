@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+// Pop up window that allows user interaction to add new items
 public class AddItem extends JFrame implements ActionListener, ScreenAdjustment {
     private JFrame home;
     private Categories currentCategories;
@@ -31,6 +32,8 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
     private JButton deleteButton;
     private SpinnerNumberModel spinnerModel;
 
+    // REQUIRES: previous home page, non-null Account and Categories, valid category and item index
+    // EFFECTS: initialize a new area to add new items
     public AddItem(int index, Categories currentCategories, Account currentAccount, JFrame home,
                    String input, int categoryIndex) {
         this.currentAccount = currentAccount;
@@ -54,6 +57,7 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
         popUp(panel, addItemPage, 320, 340);
     }
 
+    // EFFECTS: Displays window for user input
     private void printComponents(Container pane, String input) {
         JLabel enterName = new JLabel("Item name: ");
         enterName.setFont(new Font("Adobe Clean ExtraBold", Font.BOLD, 10));
@@ -85,6 +89,7 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
         }
     }
 
+    // EFFECTS: Displays window when user wants to edit items
     private void editItem(Container pane) {
         ArrayList<Items> arrayOfItems = currentCategories.getCategoryItems().get(categoryIndex);
         Items selected = arrayOfItems.get(index - 1);
@@ -103,6 +108,7 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
         pane.add(deleteButton);
     }
 
+    // EFFECTS: Allows user to input expiry date
     private void enterDate(Container pane) {
         JLabel enterDate = new JLabel("Expiry Date: ");
         enterDate.setFont(new Font("Adobe Clean ExtraBold", Font.BOLD, 10));
@@ -115,6 +121,7 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
         pane.add(invalidDate);
     }
 
+    // EFFECTS: Runs new JFrame windows based on button pressed
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == okButton) {
@@ -134,6 +141,8 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates new item
     private void addNew() {
         String itemName = nameBox.getText();
         int itemQuantity = (int) quantity.getValue();
@@ -148,6 +157,9 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
         }
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: Edits specified item
     private void modifyItem() {
         String itemName = nameBox.getText();
         int itemQuantity = (int) quantity.getValue();
@@ -178,6 +190,7 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
         return true;
     }
 
+    // EFFECTS: checks whether input name and date is valid
     private void checkValid(String name, String date) {
         if (name.isEmpty()) {
             invalidName.setText("An item name cannot be blank");
