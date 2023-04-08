@@ -29,9 +29,14 @@ public class EventTest {
 
     @Test
     public void testEvent() {
+        Event e2 = new Event("Added item");
+        Event e3 = null;
+        Event e4 = new Event("Added category");
         assertEquals("Added category", e.getDescription());
-        assertFalse(equals(e));
-        assertFalse(equals(null));
+        assertFalse(e.equals(e2));
+        assertFalse(e.equals(e3));
+        assertFalse(e.equals(e4));
+        assertTrue(e.equals(e));
         assertEqualDates(d, e.getDate());
     }
 
