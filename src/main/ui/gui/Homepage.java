@@ -83,7 +83,6 @@ public class Homepage extends JFrame implements ActionListener, ScreenAdjustment
 
         pane.add(saveData);
         panel.add(pane);
-        panel.setSize(360, 640);
         screenAdjustment(panel, home);
         JScrollPane scrollPane = new JScrollPane(panel);
         scrollBar(scrollPane, home);
