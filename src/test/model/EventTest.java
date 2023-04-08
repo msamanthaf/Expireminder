@@ -37,6 +37,7 @@ public class EventTest {
         assertFalse(e.equals(e3));
         assertFalse(e.equals(e4));
         assertTrue(e.equals(e));
+        assertFalse(e.equals(new Items("item",1,"01/01/2021")));
         assertEqualDates(d, e.getDate());
     }
 
