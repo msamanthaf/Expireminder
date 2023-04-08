@@ -30,3 +30,11 @@ Yellow means expires soon (1 month), Red means expired.
 
 - As a user, I want to have an option to save my progress when exiting the program.
 - As a user, I want to have an option to load my progress from a file.
+
+## Instructions for Grader
+
+- You can generate the first required action related to adding Xs to a Y by pressing the "Add Category" button at the homepage after making an account
+- You can generate the second required action related to adding Xs to a Y by pressing the "Add Item" button at the homepage after making an account
+- You can locate my visual component by running the main application
+- You can save the state of my application by clicking the "Yes, save my progress" button at the homepage after making an account
+- You can reload the state of my application by clicking the "Yes, load data" button
