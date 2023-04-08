@@ -19,7 +19,7 @@ public class Items implements Writable {
         notification = new Notification(date);
         EventLog.getInstance().logEvent(new Event("Item: " + name + " added."));
         if (notification.getNotified()) {
-            EventLog.getInstance().logEvent(new Event("Notification sent for item " + name + "."));
+            EventLog.getInstance().logEvent(new Event("Notification sent for item: " + name + "."));
         }
     }
 
@@ -32,7 +32,7 @@ public class Items implements Writable {
         this.date = itemDate;
         notification = new Notification(date);
         if (notification.getNotified()) {
-            EventLog.getInstance().logEvent(new Event("Notification sent for item " + name + "."));
+            EventLog.getInstance().logEvent(new Event("Notification sent for item: " + name + "."));
         }
     }
 

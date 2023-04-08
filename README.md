@@ -38,3 +38,16 @@ Yellow means expires soon (1 month), Red means expired.
 - You can locate my visual component by running the main application
 - You can save the state of my application by clicking the "Yes, save my progress" button at the homepage after making an account
 - You can reload the state of my application by clicking the "Yes, load data" button
+
+## "Phase 4: Task 2"
+- Sample event log printed to console:
+  Account created.
+  Account modified.
+  Category: Cat 1 added.
+  Item: Expired added.
+  Category: Cat 2 added.
+  Item: Good condition added.
+  Item: Expired modified.
+  Notification sent for item: Expiring soon.
+  Item: Good condition deleted.
+  Category: Cat 2 and its items are deleted.
