@@ -55,7 +55,6 @@ public class Categories implements Writable {
         ArrayList<Items> items1 = categoryItems.get(category - 1);
         items1.add(i);
         categoryItems.set(category - 1, items1);
-        addStatus(i);
     }
 
     // MODIFIES: expired, expiringSoon, goodCondition
@@ -74,8 +73,8 @@ public class Categories implements Writable {
     // MODIFIES: this
     // EFFECTS: deletes selected item from its category
     public void deleteItem(int categoryIndex, int itemIndex) {
-        EventLog.getInstance().logEvent(new Event("Item: " + categoryItems.get(categoryIndex).get(itemIndex)
-                + " deleted."));
+        EventLog.getInstance().logEvent(new Event("Item: "
+                + categoryItems.get(categoryIndex).get(itemIndex).getName() + " deleted."));
         ArrayList<Items> arrayOfItems = getCategoryItems().get(categoryIndex);
         arrayOfItems.remove(itemIndex);
     }

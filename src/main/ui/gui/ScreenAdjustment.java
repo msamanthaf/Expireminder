@@ -1,7 +1,12 @@
 package ui.gui;
 
+import model.Event;
+import model.EventLog;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 // Standard JFrame size and background for the application
 public interface ScreenAdjustment {
@@ -11,7 +16,18 @@ public interface ScreenAdjustment {
         load.setResizable(false);
         load.setTitle("EXPIREMINDER");
         load.setBackground(Color.DARK_GRAY);
-        load.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        load.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        load.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                for (Event event : EventLog.getInstance()) {
+                    String log = event.getDescription();
+                    System.out.println(log);
+                }
+                EventLog.getInstance().clear();
+                System.exit(0);
+            }
+        });
         ImageIcon logo = new ImageIcon("data/Expireminder.png");
         load.setIconImage(logo.getImage());
         load.add(screen);

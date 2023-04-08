@@ -18,6 +18,9 @@ public class Items implements Writable {
         this.date = date;
         notification = new Notification(date);
         EventLog.getInstance().logEvent(new Event("Item: " + name + " added."));
+        if (notification.getNotified()) {
+            EventLog.getInstance().logEvent(new Event("Notification sent for item " + name + "."));
+        }
     }
 
     // MODIFIES: this
@@ -27,6 +30,10 @@ public class Items implements Writable {
         this.name = itemName;
         this.quantity = itemQuantity;
         this.date = itemDate;
+        notification = new Notification(date);
+        if (notification.getNotified()) {
+            EventLog.getInstance().logEvent(new Event("Notification sent for item " + name + "."));
+        }
     }
 
     // EFFECTS: returns this as a JSON object

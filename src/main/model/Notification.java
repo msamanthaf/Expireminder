@@ -48,9 +48,6 @@ public class Notification implements Writable {
     // EFFECTS: notified is set to true if monthsLeft is less than or equals to MONTHS_BEFORE
     public void sendNotification(LocalDate currentDate, LocalDate expiryDate) {
         notified = calculateMonth(currentDate, expiryDate) <= MONTHS_BEFORE && !currentDate.isAfter(expiryDate);
-        if (notified) {
-            EventLog.getInstance().logEvent(new Event("Notification sent."));
-        }
     }
 
     // MODIFIES = expired
