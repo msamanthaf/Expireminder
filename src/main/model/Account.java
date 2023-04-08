@@ -12,6 +12,7 @@ public class Account implements Writable {
     public Account(String userName, String userEmail) {
         name = userName;
         email = userEmail;
+        EventLog.getInstance().logEvent(new Event("Account created."));
     }
 
     // MODIFIES: this
@@ -19,6 +20,7 @@ public class Account implements Writable {
     public void setAccount(String userName, String userEmail) {
         this.name = userName;
         this.email = userEmail;
+        EventLog.getInstance().logEvent(new Event("Account modified."));
     }
 
     // EFFECTS: returns this as a JSON object

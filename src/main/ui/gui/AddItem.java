@@ -136,8 +136,7 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
         }
 
         if (e.getSource() == deleteButton) {
-            ArrayList<Items> arrayOfItems = currentCategories.getCategoryItems().get(categoryIndex);
-            arrayOfItems.remove(index - 1);
+            currentCategories.deleteItem(categoryIndex, index - 1);
             new Homepage(currentAccount, currentCategories, "else");
             addItemPage.dispose();
             home.dispose();
@@ -171,9 +170,7 @@ public class AddItem extends JFrame implements ActionListener, ScreenAdjustment 
         if (!itemName.isEmpty() && !itemDate.isEmpty() && isValidDate(itemDate)) {
             ArrayList<Items> arrayOfItems = currentCategories.getCategoryItems().get(categoryIndex);
             Items selected = arrayOfItems.get(index - 1);
-            selected.setName(itemName);
-            selected.setQuantity(itemQuantity);
-            selected.setDate(itemDate);
+            selected.modifyItem(itemName, itemQuantity, itemDate);
             new Homepage(currentAccount, currentCategories, "else");
             addItemPage.dispose();
             home.dispose();

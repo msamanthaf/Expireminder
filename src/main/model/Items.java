@@ -17,6 +17,16 @@ public class Items implements Writable {
         this.quantity = quantity;
         this.date = date;
         notification = new Notification(date);
+        EventLog.getInstance().logEvent(new Event("Item: " + name + " added."));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: modify selected item's name, quantity, and date
+    public void modifyItem(String itemName, int itemQuantity, String itemDate) {
+        EventLog.getInstance().logEvent(new Event("Item: " + name + " modified."));
+        this.name = itemName;
+        this.quantity = itemQuantity;
+        this.date = itemDate;
     }
 
     // EFFECTS: returns this as a JSON object

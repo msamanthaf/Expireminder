@@ -13,14 +13,15 @@ public class ItemsTest {
     @BeforeEach
     void RunBefore() {
         item1 = new Items("Name", 1, "12/12/2022");
-        item2 = new Items("Name", 1, "03/15/2023");
+        item2 = new Items("Name", 1, "05/15/2023");
         item3 = new Items("Name", 1, "03/15/2024");
     }
 
     @Test
     void testSetName() {
         item1.setName("New Name");
-        assertEquals("New Name", item1.getName());
+        item1.modifyItem("New Name 2", 1, "12/12/2022");
+        assertEquals("New Name 2", item1.getName());
     }
 
     @Test
@@ -33,6 +34,16 @@ public class ItemsTest {
     void testSetDate() {
         item1.setDate("01/01/2021");
         assertEquals("01/01/2021", item1.getDate());
+    }
+
+    @Test
+    void testDeleteItem() {
+        Categories category1 = new Categories();
+        category1.add("category 1");
+        category1.addItem(item1, 1);
+        assertEquals(1, category1.getCategoryItems().get(0).size());
+        category1.deleteItem(0, 0);
+        assertEquals(0, category1.getCategoryItems().get(0).size());
     }
 
     @Test

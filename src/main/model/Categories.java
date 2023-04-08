@@ -28,17 +28,22 @@ public class Categories implements Writable {
         categoryIndex.add(String.valueOf(categoryName.size() + 1));
         categoryName.add(name);
         categoryItems.add(new ArrayList<>());
+        EventLog.getInstance().logEvent(new Event("Category: " + name + " added."));
     }
 
     // MODIFIES: this
     // EFFECTS: sets the new name of the given element
     public void rename(int i, String name) {
+        EventLog.getInstance().logEvent(new Event("Category: " + categoryName.get(i - 1) + " renamed into "
+                + name + "."));
         categoryName.set(i - 1, name);
     }
 
     // MODIFIES: this
     // EFFECTS: removes an index from list of name, index, and items
     public void delete(int index) {
+        EventLog.getInstance().logEvent(new Event("Category: " + categoryName.get(index)
+                + " and its items are deleted."));
         categoryName.remove(index);
         categoryIndex.remove(getCategoryIndex().size() - 1);
         categoryItems.remove(index);
@@ -64,6 +69,15 @@ public class Categories implements Writable {
         } else {
             goodCondition.add(i);
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: deletes selected item from its category
+    public void deleteItem(int categoryIndex, int itemIndex) {
+        EventLog.getInstance().logEvent(new Event("Item: " + categoryItems.get(categoryIndex).get(itemIndex)
+                + " deleted."));
+        ArrayList<Items> arrayOfItems = getCategoryItems().get(categoryIndex);
+        arrayOfItems.remove(itemIndex);
     }
 
     // EFFECTS: returns this as a JSON object

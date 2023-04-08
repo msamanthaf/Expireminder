@@ -23,13 +23,13 @@ public class EventTest {
 
     @BeforeEach
     public void runBefore() {
-        e = new Event("Sensor open at door");   // (1)
+        e = new Event("Added category");   // (1)
         d = Calendar.getInstance().getTime();   // (2)
     }
 
     @Test
     public void testEvent() {
-        assertEquals("Sensor open at door", e.getDescription());
+        assertEquals("Added category", e.getDescription());
         assertEqualDates(d, e.getDate());
     }
 
@@ -44,6 +44,6 @@ public class EventTest {
 
     @Test
     public void testToString() {
-        assertEquals(d.toString() + "\n" + "Sensor open at door", e.toString());
+        assertEquals(d.toString() + "\n" + "Added category", e.toString());
     }
 }
