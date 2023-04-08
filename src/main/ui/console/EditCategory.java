@@ -2,6 +2,7 @@ package ui.console;
 
 import model.Categories;
 import model.Items;
+import model.Notification;
 import persistence.JsonReader;
 
 import java.text.DateFormat;
@@ -16,9 +17,9 @@ public class EditCategory {
     private Categories category;
     private Home home;
     private String dateFormat;
-    private int goodCondition;
-    private int expiringSoon;
-    private int expired;
+    private ArrayList<Items> goodCondition = new ArrayList<>();
+    private ArrayList<Items> expiringSoon = new ArrayList<>();
+    private ArrayList<Items> expired = new ArrayList<>();
 
     // REQUIRES: the previous Home page
     // EFFECTS: initialize a new area for storing categories and items
@@ -284,12 +285,22 @@ public class EditCategory {
         category.getExpired().clear();
         for (ArrayList<Items> listOfItems : category.getCategoryItems()) {
             for (Items item : listOfItems) {
-                category.addStatus(item);
+                addStatus(item);
             }
         }
-        goodCondition = category.getGoodCondition().size();
-        expiringSoon = category.getExpiringSoon().size();
-        expired = category.getExpired().size();
+    }
+
+    // MODIFIES: expired, expiringSoon, goodCondition
+    // EFFECTS: creates new notification for this item and sort it into a group
+    public void addStatus(Items i) {
+        Notification dummy = new Notification(i.getDate());
+        if (dummy.getExpired()) {
+            expired.add(i);
+        } else if (dummy.getNotified()) {
+            expiringSoon.add(i);
+        } else {
+            goodCondition.add(i);
+        }
     }
 
     public ArrayList<String> getCategory() {
@@ -301,14 +312,14 @@ public class EditCategory {
     }
 
     public int getGoodCondition() {
-        return goodCondition;
+        return category.getGoodCondition().size();
     }
 
     public int getExpiringSoon() {
-        return expiringSoon;
+        return category.getExpiringSoon().size();
     }
 
     public int getExpired() {
-        return expired;
+        return category.getExpired().size();
     }
 }

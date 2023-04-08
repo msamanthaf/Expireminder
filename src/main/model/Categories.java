@@ -57,19 +57,6 @@ public class Categories implements Writable {
         categoryItems.set(category - 1, items1);
     }
 
-    // MODIFIES: expired, expiringSoon, goodCondition
-    // EFFECTS: creates new notification for this item and sort it into a group
-    public void addStatus(Items i) {
-        Notification dummy = new Notification(i.getDate());
-        if (dummy.getExpired()) {
-            expired.add(i);
-        } else if (dummy.getNotified()) {
-            expiringSoon.add(i);
-        } else {
-            goodCondition.add(i);
-        }
-    }
-
     // MODIFIES: this
     // EFFECTS: deletes selected item from its category
     public void deleteItem(int categoryIndex, int itemIndex) {

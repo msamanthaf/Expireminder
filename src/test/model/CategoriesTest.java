@@ -68,22 +68,4 @@ public class CategoriesTest {
         assertEquals(listOfItems, category1.getCategoryItems().get(0));
         assertEquals(empty, category1.getCategoryItems().get(1));
     }
-
-    @Test
-    void testAddStatus() {
-        String name = "Name";
-        Integer quantity = 1;
-        String date2 = "02/04/2002";
-        String date1 = "03/30/2023";
-        String date3 = "02/04/2024";
-        Items item1 = new Items(name, quantity, date1);
-        Items item2 = new Items(name, quantity, date2);
-        Items item3 = new Items(name, quantity, date3);
-        category1.addStatus(item1);
-        category1.addStatus(item2);
-        category1.addStatus(item3);
-        assertEquals(1, category1.getExpired().size());
-        assertEquals(1, category1.getExpiringSoon().size());
-        assertEquals(1, category1.getGoodCondition().size());
-    }
 }

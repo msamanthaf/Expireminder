@@ -20,7 +20,6 @@ public class ItemsTest {
     @Test
     void testSetName() {
         item1.setName("New Name");
-        item1.modifyItem("New Name 2", 1, "12/12/2022");
         assertEquals("New Name 2", item1.getName());
     }
 
@@ -34,6 +33,17 @@ public class ItemsTest {
     void testSetDate() {
         item1.setDate("01/01/2021");
         assertEquals("01/01/2021", item1.getDate());
+    }
+
+    @Test
+    void testModifyItem(){
+        assertEquals("Name", item1.getName());
+        assertEquals(1, item1.getQuantity());
+        assertEquals("12/12/2022", item1.getDate());
+        item1.modifyItem("New Name", 2, "01/01/2023");
+        assertEquals("New Name", item1.getName());
+        assertEquals(2, item1.getQuantity());
+        assertEquals("01/01/2023", item1.getDate());
     }
 
     @Test
