@@ -20,7 +20,7 @@ public class ItemsTest {
     @Test
     void testSetName() {
         item1.setName("New Name");
-        assertEquals("New Name 2", item1.getName());
+        assertEquals("New Name", item1.getName());
     }
 
     @Test

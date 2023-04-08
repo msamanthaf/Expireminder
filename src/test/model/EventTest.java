@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit tests for the Event class
@@ -30,6 +30,7 @@ public class EventTest {
     @Test
     public void testEvent() {
         assertEquals("Added category", e.getDescription());
+        assertFalse(equals(e));
         assertEqualDates(d, e.getDate());
     }
 
@@ -44,6 +45,10 @@ public class EventTest {
 
     @Test
     public void testToString() {
+        int HASH_CONSTANT = 13;
+        Date dateLogged = e.getDate();
+        String description = e.getDescription();
         assertEquals(d.toString() + "\n" + "Added category", e.toString());
+        assertEquals((HASH_CONSTANT * dateLogged.hashCode() + description.hashCode()), e.hashCode());
     }
 }
