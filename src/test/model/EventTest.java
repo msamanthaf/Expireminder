@@ -31,6 +31,7 @@ public class EventTest {
     public void testEvent() {
         assertEquals("Added category", e.getDescription());
         assertFalse(equals(e));
+        assertFalse(equals(null));
         assertEqualDates(d, e.getDate());
     }
 

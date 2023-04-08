@@ -61,5 +61,7 @@ public class ItemsTest {
         assertFalse(item1.getNotification().getNotified());
         assertTrue(item2.getNotification().getNotified());
         assertFalse(item3.getNotification().getNotified());
+        item1.modifyItem("Name", 2, "05/10/2023");
+        assertTrue(item1.getNotification().getNotified());
     }
 }

@@ -118,16 +118,4 @@ public class Categories implements Writable {
     public void setCategoryItems(ArrayList<ArrayList<Items>> items) {
         categoryItems = items;
     }
-
-    public ArrayList<Items> getGoodCondition() {
-        return goodCondition;
-    }
-
-    public ArrayList<Items> getExpiringSoon() {
-        return expiringSoon;
-    }
-
-    public ArrayList<Items> getExpired() {
-        return expired;
-    }
 }

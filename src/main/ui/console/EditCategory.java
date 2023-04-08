@@ -280,9 +280,6 @@ public class EditCategory {
     // MODIFIES: this
     // EFFECTS: sorts every item present in category and display the number items inside each group
     public void checkStatus() {
-        category.getGoodCondition().clear();
-        category.getExpiringSoon().clear();
-        category.getExpired().clear();
         for (ArrayList<Items> listOfItems : category.getCategoryItems()) {
             for (Items item : listOfItems) {
                 addStatus(item);
@@ -312,14 +309,14 @@ public class EditCategory {
     }
 
     public int getGoodCondition() {
-        return category.getGoodCondition().size();
+        return goodCondition.size();
     }
 
     public int getExpiringSoon() {
-        return category.getExpiringSoon().size();
+        return expiringSoon.size();
     }
 
     public int getExpired() {
-        return category.getExpired().size();
+        return expired.size();
     }
 }
