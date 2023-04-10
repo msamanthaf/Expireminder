@@ -19,17 +19,15 @@ public class Setup extends JFrame implements ActionListener, ScreenAdjustment {
     private String inputEmail;
     private JLabel invalidName = new JLabel();
     private JLabel invalidEmail = new JLabel();
+    private String inputCase;
     private Categories currentCategories;
     private Account currentAccount;
-    private String inputCase;
-    private Account account;
-    private Categories category;
 
     // REQUIRES: the previous start page
     // EFFECTS: creates new page to set up an account
     public Setup(String inputCase, Account account, Categories category) {
-        this.account = account;
-        this.category = category;
+        this.currentAccount = account;
+        this.currentCategories = category;
         this.inputCase = inputCase;
         setupPage = new JFrame();
         panel = new JPanel();
@@ -80,9 +78,7 @@ public class Setup extends JFrame implements ActionListener, ScreenAdjustment {
                     currentAccount = new Account(inputName, inputEmail);
                     currentCategories = new Categories();
                 } else {
-                    account.setAccount(inputName, inputEmail);
-                    currentAccount = account;
-                    currentCategories = category;
+                    currentAccount.setAccount(inputName, inputEmail);
                 }
                 setupPage.dispose();
                 new Homepage(currentAccount, currentCategories, inputCase);

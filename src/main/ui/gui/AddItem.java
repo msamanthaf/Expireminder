@@ -15,9 +15,9 @@ import java.util.ArrayList;
 
 // Pop up window that allows user interaction to add new items
 public class AddItem extends JFrame implements ActionListener, ScreenAdjustment {
-    private JFrame home;
-    private Categories currentCategories;
     private Account currentAccount;
+    private Categories currentCategories;
+    private JFrame home;
     private int index;
     private int categoryIndex;
     private JFrame addItemPage;

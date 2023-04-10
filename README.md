@@ -33,10 +33,13 @@ Yellow means expires soon (1 month), Red means expired.
 
 ## Instructions for Grader
 
-- You can generate the first required action related to adding Xs to a Y by pressing the "Add Category" button at the homepage after making an account
-- You can generate the second required action related to adding Xs to a Y by pressing the "Add Item" button at the homepage after making an account
+- You can generate the first required action related to adding Xs to a Y by pressing the "Add Category" button at the 
+homepage after making an account
+- You can generate the second required action related to adding Xs to a Y by pressing the "Add Item" button at the 
+homepage after making an account
 - You can locate my visual component by running the main application
-- You can save the state of my application by clicking the "Yes, save my progress" button at the homepage after making an account
+- You can save the state of my application by clicking the "Yes, save my progress" button at the homepage after making
+an account
 - You can reload the state of my application by clicking the "Yes, load data" button
 
 ## Phase 4: Task 2
@@ -51,3 +54,10 @@ Sample event log printed to console:
   - Notification sent for item: Expiring soon.
   - Item: Good condition deleted.
   - Category: Cat 2 and its items are deleted.
+
+## Phase 4: Task 3
+If I had more time to work on this project, I would improve my design by refactoring the AddCategory and EditCategory 
+GUI classes to be combined as one class called "AddCategory" like how I did with the AddItem class, considering that 
+they both have similar if not the same connections as shown in the UML diagram. In addition, rather than passing Account 
+and Category for each GUI classes, it would be better to just pass Homepage and use a getter for the Account and 
+Category located in the Homepage's class.

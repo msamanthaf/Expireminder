@@ -11,9 +11,6 @@ public class Categories implements Writable {
     private ArrayList<String> categoryName;
     private ArrayList<String> categoryIndex;
     private ArrayList<ArrayList<Items>> categoryItems;
-    private ArrayList<Items> goodCondition = new ArrayList<>();
-    private ArrayList<Items> expiringSoon = new ArrayList<>();
-    private ArrayList<Items> expired = new ArrayList<>();
 
     // EFFECTS: creates new empty list of names, index, and items
     public Categories() {

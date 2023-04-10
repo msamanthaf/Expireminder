@@ -58,8 +58,7 @@ public class JsonReader {
     private Account parseAccount(JSONObject obj) {
         String name = obj.getString("name");
         String email = obj.getString("email");
-        Account account = new Account(name, email);
-        return account;
+        return new Account(name, email);
     }
 
     // MODIFIES: categories

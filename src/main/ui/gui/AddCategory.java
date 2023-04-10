@@ -10,13 +10,13 @@ import java.awt.event.ActionListener;
 
 // Pop up window that allows user interaction to add new categories
 public class AddCategory extends JFrame implements ActionListener, ScreenAdjustment {
+    private Account currentAccount;
     private Categories currentCategories;
     private JFrame addCategoryPage;
     private JPanel panel;
     private JTextField nameBox = new JTextField(1);
     private JLabel invalidName = new JLabel();
     private JButton okButton;
-    private Account currentAccount;
 
     // REQUIRES: non-null Account and Categories
     // EFFECTS: initialize a new area to add new categories

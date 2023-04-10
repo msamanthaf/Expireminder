@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 // User interaction to edit a category
 public class EditCategory extends JFrame implements ActionListener, ScreenAdjustment {
+    private Account currentAccount;
     private Categories currentCategories;
     private JFrame editCategoryPage;
     private JFrame home;
@@ -19,7 +20,6 @@ public class EditCategory extends JFrame implements ActionListener, ScreenAdjust
     private JButton renameButton;
     private JButton deleteButton;
     private JButton backButton;
-    private Account currentAccount;
     private int index;
 
     // REQUIRES: previous home page, non-null Account and Categories, valid category index
